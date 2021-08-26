@@ -1,5 +1,5 @@
 const e = require('express');
-const users = require('../Model/users');
+const { users } = require('../models');
 
 module.exports = {
     // [PATCH] /user/profile/:id
