@@ -18,5 +18,8 @@ module.exports = {
                 return res.status(200).send({ "data": result, "message": "profile changed" });
             }
         })
+        .catch(err => {
+            console.log(err);
+        })
     }
 }
