@@ -18,14 +18,12 @@ router.post("/sign-up", (req, res) => {
       where: {
         user_id: id,
       },
-      defaults: {
-        password: passwordToken,
+      default: {
+        password,
         nickname: userName,
         phone_number: mobile,
         sign_up_type: signUpType,
         account_type: "client",
-        created_at: new Date(),
-        updated_at: new Date(),
       },
     })
     .then(([result, created]) => {
