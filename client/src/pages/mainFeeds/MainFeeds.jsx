@@ -4,17 +4,14 @@ import SubNavbar from '../../components/subNavbar/SubNavbar';
 import FeedContent from '../../components/feedContent/FeedContent';
 
 
-const MainFeeds = (props) => {
+const MainFeeds = ({feeds, handleClick}) => {
   return (
   <section className={styles.main}>
     <SubNavbar />
     <ul className={styles.feedList}>
-        <FeedContent/>  
-        <FeedContent/> 
-        <FeedContent/> 
-        <FeedContent/>  
-        <FeedContent/> 
-        <FeedContent/> 
+      {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
+      {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
+      {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
     </ul>
   </section>
   )

@@ -8,12 +8,22 @@ const Myinfo = (props) => {
 
     /* 내정보수정이동*/
     const [isModifyClicked, setIsModifyClicked] = useState(false);
+    const [info, setInfo] = useState({
+        '1':{
+            id: "",
+            nickname: "",
+            mobile: "",
+            password: "",
+            passwordConfirm: "",
+        }
+    })
 
+
+
+    //수정하기 버튼 클릭시 이동 
     const handleClickModify = () => {
         setIsModifyClicked(true);
     }
-
-
 
     return(
         <>
@@ -45,15 +55,20 @@ const Myinfo = (props) => {
             </div>
 
             <div className={styles.btns}>
-            <button className={styles.btn}>회원탈퇴(optional)</button>
-            <button className={styles.btn} onClick={handleClickModify} 
-                isModifyClicked={isModifyClicked}
-                setIsModifyClicked={setIsModifyClicked}
-            >수정하기</button>
+                <button className={styles.btn}>회원탈퇴(optional)</button>
+                <button className={styles.btn} 
+                        onClick={handleClickModify} 
+                        isModifyClicked={isModifyClicked}
+                        setIsModifyClicked={setIsModifyClicked}>수정하기
+                </button>
             </div>
         </>
         :
-        <MyinfoModify />
+        <MyinfoModify 
+        isModifyClicked={isModifyClicked} 
+        setIsModifyClicked={setIsModifyClicked}
+        info={info} 
+        setInfo={setInfo}/>
         }
 
        </>

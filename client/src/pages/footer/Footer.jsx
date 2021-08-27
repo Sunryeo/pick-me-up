@@ -6,18 +6,21 @@ const Footer = (props) => {
   <footer>
     <div className={styles.container}>
       <div className={styles.contentbox}>
+        <div className={styles.title}>
+          TEAM MEMBER
+        </div>
+
         <ul className={styles.info}>
           <li className={styles.name}>
-              <span className={styles.title}>Team Info</span>
-              <span>문순려 [back end] -  저는 문순려입니다~~~~</span>
-              <span>이동욱 [back end] -  저는 문순려입니다~~~~</span>
-              <span>유다희 [frontend]] -  저는 문순려입니다~~~~</span>
-              <span>박지영 [frontend]] -  저는 문순려입니다~~~~</span>
+              <span>문순려 [back end] </span>
+              <span>이동욱 [back end] </span>
+              <span>유다희 [frontend]] </span>
+              <span>박지영 [frontend]] </span>
           </li>
         </ul>
       </div>
     </div>
-    
+   
   </footer>
   )
 };

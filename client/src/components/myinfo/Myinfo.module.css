@@ -87,13 +87,12 @@
 }
 .btn{
     padding: 0.8em 2em;
-    background-color: none;
-    background-color:  gainsboro;
+    background-color: rgb(240, 199, 35);
+    color:white;
     outline: none;
     cursor: pointer;
     font-weight: bold;
     border: none;
-
 }
 
 

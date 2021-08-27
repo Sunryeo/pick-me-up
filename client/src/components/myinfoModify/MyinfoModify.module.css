@@ -1,27 +1,21 @@
-
 .infobox{
     width: 100%;
     margin: 0 auto;
-    /*height*/
-    display: flex;
-    /* flex: 1; */
     border-bottom: 1px solid grey;
+    display: flex;
     flex-direction: column;
-
 }
 
-
-.imgbox{  /*editor*/
+.imgbox{  
     padding: 0.5em 2em;
-    /* flex-basis: 30%; */
     width: 100%;
     height: 20rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .imgborder{
-    /* margin-top: 2rem; */
     display: block;
     width: 60%;
     height: 60%;
@@ -34,39 +28,53 @@
     height:100%;
     border-radius: 30%;
 }
+.editbox{
+    margin-top: 0.5rem;
+    color: white;
+    font-size: 1rem;
+    background-color: rgb(250, 206, 27);
+    border-radius: 5px;
+    width: 10rem;
+    height: 2rem;
+    text-align: center;
+    
+}
+.editimg{
+    background-color: rgb(250, 206, 27);
+    border-radius: 5px;
+    width: 10rem;
+    height: 5rem;
+    cursor: pointer;
+    line-height: normal;
+    vertical-align: middle;
+    
+}
 
-.textbox{/*oreview*/
+.textbox{
     padding: 0.5em 2em;
-    /* flex-basis: 70%; */
     width: 100%;
     height: 25rem;
     display: flex;
     border-top: 1px solid  rgb(185, 180, 180);
-
 }
 .ulbox{
-
-    justify-content: center;
-    align-items: center;
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     justify-content: space-around
 }
 .list,
 .passconfirm{
     display: block;
-    border-bottom:1px solid rgb(185, 180, 180);
-    width: 21rem;
+    width: 23rem;
     height: 4rem;
-    font-size: 1.2rem;
-
+    border-bottom:1px solid rgb(185, 180, 180);
+    font-size: 1rem;
     display: flex;
     align-items:center;
     justify-content: space-between;
-}
-.passconfirm{
-    font-size: 0.8rem;
 }
 
 .input{
@@ -79,6 +87,7 @@
     text-align:end;
     border:none;
     color: grey;
+    
 
 }
 
@@ -92,8 +101,8 @@
 }
 .btn{
     padding: 0.8em 2em;
-    background-color: none;
-    background-color:  gainsboro;
+    background-color: rgb(240, 199, 35);
+    color: white;
     outline: none;
     cursor: pointer;
     font-weight: bold;

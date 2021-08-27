@@ -12,17 +12,19 @@ const Mypage = () => {
   const handleClickMyinfo = () => {
       setInfoClicked(true); 
   }
-  const handleClickMycontnent = ()=> {
-    setInfoClicked(false);
+  const handleClickMycontent = () => {
+    setInfoClicked(false); 
   }
  
+  const infounderline = (infoClicked ? styles.myinfosub : styles.myinfo );
+  const contentunderline = (infoClicked ? styles.mycontent : styles.mycontentsub );
 
   return (
     <section className={styles.container}>
 
         <nav className={styles.category}>
-            <div className={styles.myinfo} onClick={handleClickMyinfo}>MY INFO</div>
-            <div className={styles.mycontent} onClick={handleClickMycontnent}>MY CONTENT</div>
+          <div className={`${infounderline}`} onClick={handleClickMyinfo}>MY INFO</div>
+          <div className={`${contentunderline}`} onClick={handleClickMycontent}>MY CONTENT</div>
         </nav>
         
         <div className={styles.body}>

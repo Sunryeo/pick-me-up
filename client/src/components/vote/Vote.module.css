@@ -1,0 +1,44 @@
+.container {
+  /* padding-top: 5rem; */
+  list-style: none;
+  margin: 0 auto;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+}
+.images {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0.8rem;
+  width: 500px;
+  height: 350px;
+  overflow: hidden;
+}
+
+.image {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.image:hover {
+  transform: scale(1.1);
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.optionName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(67, 67, 67);
+  font-size: 0.8rem;
+}
+
+/* .radioBox {
+  width: 1rem;
+} */

@@ -1,32 +1,39 @@
+
 .container {
   width:100%;
-  height: 300px;
+  height: 250px;
   padding: 0.5em;
-  background-color:rgb(247, 240, 229);
+  background-color: #f9d373;
+  /* background-color: #f7cc61; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.contentbox{
+.contentbox {
   width: 500px;
   text-align: center;
   margin: 0 auto;
 }
 
-.info { /*ul부분*/
+.info {
+  /*ul부분*/
   list-style: none;
   padding: 0.8rem 0.8rem;
 }
-.title{
+.title {
   margin-bottom: 2rem;
   font-size: 2rem;
+  font-weight: bold;
 }
 
-.name{  /*li부분 > span*/
+.name {
+  /*li부분 > span*/
   display: block;
-
+  font-weight: bold;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: unset;
 }
+

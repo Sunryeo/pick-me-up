@@ -7,12 +7,12 @@ const Writing = (props) => {
   <section className={styles.container}>
     <div className={styles.category}>
       <div>제목</div>
-      <input type="text"/>
+      <input className={styles.textBox} type="text"/>
     </div>
     
     <div className={styles.category}>    
       <div>투표 옵션 1</div>
-      <input type="text" />
+      <input className={styles.textBox} type="text" />
       <div class={styles.filebox}>
         <label for="ex_file">이미지 업로드</label> 
         <input type="file" id="ex_file"></input> 
@@ -23,7 +23,7 @@ const Writing = (props) => {
 
     <div className={styles.category}>    
       <div>투표 옵션 2</div>
-      <input type="text"/>
+      <input className={styles.textBox} type="text"/>
       <div class={styles.filebox}>
         <label for="ex_file">이미지 업로드</label> 
         <input type="file" id="ex_file"></input> 

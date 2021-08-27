@@ -1,5 +1,7 @@
+
 .container {
   margin-bottom: 3rem;
+  overflow: hidden;
 }
 
 .img {
@@ -8,7 +10,7 @@
   margin-bottom: 1rem;
   width: 500px;
   height: 350px;
-  overflow: hidden;
+ 
 }
 .image {
   width: 50%;
@@ -40,4 +42,15 @@
 .voteText {
   font-size: 0.68rem;
   margin-left: 0.5rem;
+}
+
+
+@media screen and (max-width: 33rem) {
+  .container {
+    width: 470px;
+  }
+  .img {
+    width: 100%;
+  }
+  
 }

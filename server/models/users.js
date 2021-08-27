@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
       },
       user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: true,
       },
       password: {
@@ -36,10 +36,12 @@ module.exports = function (sequelize, DataTypes) {
       created_at: {
         type: DataTypes.DATE,
         allowNull: true,
+        timestamps: true,
       },
       updated_at: {
         type: DataTypes.DATE,
         allowNull: true,
+        timestamps: true,
       },
     },
     {
