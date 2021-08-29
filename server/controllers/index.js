@@ -4,7 +4,7 @@ const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
 const jwt = require("jsonwebtoken");
-
+const { getAllPost } = require("./MainPage");
 //아이디 닉네임 모바일 비밀번호
 
 router.patch("/user/profile/:id", changeProfile);
@@ -37,6 +37,7 @@ router.post("/sign-up", (req, res) => {
         return res.status(409).send("id exists");
       }
       const data = result.dataValues;
+
       return res.status(201).json({ message: "ok" });
     })
     .catch((err) => {
@@ -47,31 +48,38 @@ router.post("/sign-up", (req, res) => {
 router.post("/sign-in", async (req, res) => {
   const { userId, password } = req.body;
 
-  passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
+  const passwordToken = jwt.sign(password, process.env.ACCESS_SECRET);
 
-  const userInfo = await users.findOne({
+  const result = await users.findOne({
     where: {
       user_id: userId,
       password: passwordToken,
     },
   });
-
-  if (!userInfo) {
+  if (!result) {
     return res.status(404).send("invalid user");
   }
-
-  delete userInfo.password;
+  const userInfo = result.dataValues;
+  console.log(userInfo);
 
   const accessToken = jwt.sign(userInfo, process.env.ACCESS_SECRET);
-  res.cookie("jwt", accessToken);
-  return res.status(200).json({
-    message: "ok",
-  });
+
+  return res
+    .status(200)
+    .cookie("jwt", accessToken, {
+      httpOnly: true,
+      secure: false,
+    })
+    .json({
+      message: "ok",
+    });
 });
 
 router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
+
+router.get("/get-all-post", getAllPost);
 
 router.get("/", (req, res) => {
   res.send("hello world!");
