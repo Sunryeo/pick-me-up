@@ -25,7 +25,7 @@ router.post("/sign-up", (req, res) => {
         user_id: userId,
       },
       default: {
-        password,
+        password: passwordToken,
         nickname: userName,
         phone_number: mobile,
         sign_up_type: 2,
