@@ -45,7 +45,6 @@
 } */
 
 .title {
-  cursor: pointer;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
@@ -71,12 +70,13 @@
 }
 .hashtag {
   display: inline-block;
-  margin-right: 0.4rem;
+  margin-left: 0.3rem;
+  margin-right: 0.2rem;
   background-color: rgb(240, 199, 35);
   color: white;
   padding: 0.3rem;
   border-radius: 5px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .voteText {

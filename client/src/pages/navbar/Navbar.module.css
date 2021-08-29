@@ -1,128 +1,94 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
-a {
-  text-decoration: none;
-}
 .header {
   width: 100%;
-  height: 50px;
-  margin-top: 1rem;
-
-  /* background-color: #fbc000;*/
+  height: 150px;
+  background-color: #fbc000;
 }
 
 .contentbox {
   width: 500px;
+  height: 150px;
   text-align: center;
   margin: 0 auto;
   position: relative;
+  top: 0px;
 }
 
-.underline{
-    text-decoration: none;
-}
 
 .title {
+  position: absolute;
+  top: 30px;
+  left: 180px;
+  width: 150px;
   font-family: "Fredoka One", cursive;
   color: black;
   text-decoration-line: none;
-  font-size: 1.6rem;
-}
-
-.btns {
-  height: 3rem;
-  position: absolute;
-  right: 1em;
-  top: 1em;
-}
-
-.signin:hover {
-  color: gray;
-}
-
-.mypage:hover {
-  color: gray;
-}
-
-  .homebtn {
-    width: 3rem;
-    position: absolute;
-    left: 0.5em;
-    top: 1.8em;
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-  .btns {
-    height: 3rem;
-    position: absolute;
-    right: 0.5em;
-    /* top: 1.85em; */
-  }
-  .signin {
-    font-size: 0.8rem;
-    font-weight: bold;
-    height: 100%;
-    border: 0;
-    background-color: white;
-    cursor: pointer;
-    outline: none;
-  }
-  .mypage {
-    width: 10.5rem;
-    height: 3rem;
-    margin: 0.8em;
-    padding: 0.2rem 0.8rem;
-    color: black; 
-    font-size: 2rem;
-    position: absolute;
-    left: 8rem;
-    top:1rem;
-    text-align: center;
+  font-size: 1.8rem;
+  cursor: pointer;
 }
 
 .btns{
-    height: 1.5rem;
+    width: 140px;
+    height: 30px;
     position: absolute;
-    right: 1em;
-    top: 3.4em;
-
-}
-.signin,
-.mypage{
-    font-size: 0.8rem;
-    font-weight: bold;
-    height: 70%;
-    border: 0; 
-    background-color: rgb(247, 240, 229);
-    cursor: pointer;
-    outline: none;
-  }
+    right: 0;
+    display: flex;
+    flex-direction: row;
 }
 
-.signin:hover,
-.mypage:hover{
-    color:gray;
+.signbtn,
+.mypagebtn{
+  width: 70px;
+  height: 30px;
+  border: 0;
+  background-color: #fbc000;
+  font-family: "Fredoka One", cursive;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+
 }
 
-.mypage{
-    margin-left: 0.5rem;
+.mypagebtn{
+  margin-left: 10px;
 }
+
+
+.signbtn:hover,
+.mypagebtn:hover {
+  color: rgb(238, 235, 235);
+
+}
+
 
 
 /*반응형*/
 @media screen and (max-width: 33rem) {
+
+
     .contentbox{
         width: 28rem;
     }
  
     .btns{
-        height: 5rem;
-        position: absolute;
-        right: 1em;
-        top: 1em;
-        display: flex;
-        flex-direction: column;
+      width: 140px;
+      height: 30px;
+      position: absolute;
+      right: 0;
+      display: flex;
+      flex-direction: row;
+  }
+  
+  .signbtn,
+  .mypagebtn{
+    width: 60px;
+    margin-top: 5px;
+    margin-left: 10px;
     
-    }
+
+  }
+  
 }
+
 

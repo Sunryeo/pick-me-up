@@ -18,7 +18,6 @@ sequelize = new Sequelize(config.database, config.username, config.password, {
   dialect: "mysql",
   dialectOptions: {
     ssl: "Amazon RDS",
-    requestTimeout: 3000,
   },
   pool: { maxConnections: 5, maxIdleTime: 30 },
   language: "en",

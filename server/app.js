@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 class App {
   constructor() {
     this.app = express();
@@ -23,7 +24,14 @@ class App {
     this.app.use(logger("dev"));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
-    this.app.use(cors());
+    this.app.use(
+      cors({
+         origin: ["http://localhost:3000"],
+        credentials: true,
+        methods: ["GET", "POST", "OPTIONS"],
+      })
+    ); // 응답 상태 200으로 설정}));
+    this.app.use(cookieParser());
   }
 
   getRouting() {

@@ -1,4 +1,3 @@
-
 .container {
   margin-bottom: 3rem;
   overflow: hidden;
@@ -7,10 +6,9 @@
 .img {
   cursor: pointer;
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
   width: 500px;
   height: 350px;
- 
 }
 .image {
   width: 50%;
@@ -18,15 +16,14 @@
   object-fit: cover;
 }
 .title {
-  cursor: pointer;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
   margin-left: 0.3rem;
   font-weight: bold;
 }
 
 .categories {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.8rem;
 }
 .hashtag {
   display: inline-block;
@@ -36,14 +33,13 @@
   color: white;
   padding: 0.3rem;
   border-radius: 5px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .voteText {
   font-size: 0.68rem;
   margin-left: 0.5rem;
 }
-
 
 @media screen and (max-width: 33rem) {
   .container {
@@ -52,5 +48,4 @@
   .img {
     width: 100%;
   }
-  
 }

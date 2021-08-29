@@ -1,56 +1,54 @@
-.textBox {
+.textBoxTitle {
   width: 100%;
   height: 2rem;
   border: 1px solid rgb(193, 193, 193);
-  border-radius: 5px;
 }
-
+.textBoxOpt {
+  width: 100%;
+  height: 2rem;
+  border: 1px solid rgb(193, 193, 193);
+  border-bottom: 1px solid rgb(225, 225, 225);
+}
 textarea {
   width: 100%;
   border: 1px solid rgb(193, 193, 193);
-  border-radius: 5px;
 }
 
 .container {
   margin: 0 auto;
-  padding: 5rem 2rem 2rem 2rem;
-  display: flex;
-  flex-direction: column;
+  padding: 5rem 2rem 8rem 2rem;
   width: 500px;
   height: 700px;
   color: rgb(85, 85, 85);
   font-size: 0.8rem;
 }
+
 .category {
   margin-bottom: 1rem;
 }
-
 .filebox {
-  text-align: right;
-
+  display: flex;
+  align-items: end;
+  height: 2rem;
 }
-.filebox label {
-  display: inline-block;
-  padding: 0.3em 0.5em;
-  color: #fff;
-  font-size: 0.7rem;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: rgb(250, 206, 27);
+
+.filebox input[type="file"] {
   cursor: pointer;
-  border: 1px solid rgb(250, 206, 27);
-  border-radius: 5px;
+  color: grey;
+  font-size: 0.7rem;
+  border: 1px solid rgb(193, 193, 193);
+  border-top: none;
+  width: 100%;
+  height: 100%;
+  padding-top: 0.35rem;
 }
 
-input[type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+.fileView {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgb(193, 193, 193);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
 }
 
 input[type="checkbox"] {
@@ -77,9 +75,15 @@ input[type="checkbox"] {
   margin-right: 0.3rem;
 }
 
-.hashtag:hover {
+.hashtagClicked {
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.65rem;
+  margin-right: 0.3rem;
   border: none;
   color: white;
+  border: 1px solid rgb(48, 48, 48);
   background-color: rgb(48, 48, 48);
 }
 
@@ -98,5 +102,6 @@ input[type="checkbox"] {
 }
 
 .subTitle {
+  display: inline-block;
   font-size: 0.2rem;
 }

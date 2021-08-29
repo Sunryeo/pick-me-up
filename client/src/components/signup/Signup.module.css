@@ -1,5 +1,5 @@
-/* 상위 컴포넌트에서 flex걸어서 로그인창 가운데정렬하기  */
 
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 span{
   display: block;
@@ -28,8 +28,8 @@ span{
 }
 
 .titlebox{
-  
-  background-color: rgb(240, 199, 35);
+  font-family: "Fredoka One", cursive;
+  background-color: #fbc000;
   height: 4rem;
   color: white;
   position: relative;
@@ -38,13 +38,14 @@ span{
   position: absolute;
   width: 40%;
   height:70%;
-  top: 10%;
+  top: 17%;
   left: 30%;
   font-size: 2rem;
+  color:black;
 }
 .close{
   position: absolute;
-  background-color: rgb(240, 199, 35);
+  background-color: #fbc000;
   width: 30px; 
   height:30px;
   top: 0;
@@ -106,7 +107,7 @@ span{
 
 
 /*존재하는 경우*/
-.label{
+/* .label{
   border:1px solid black;
   display: none;
   width: 50%; 
@@ -115,10 +116,11 @@ span{
   font-size: 13px;
   padding: 5px 5px;
   color: red;
-}
+} */
 
 
 .signupBtn{
+  font-family: "Fredoka One", cursive;
   width: 100%;
   height: 4em;
   font-size: 1.2rem;
@@ -131,8 +133,21 @@ span{
 
 .signupBtn:hover{
   color: white;
-  background-color: rgb(240, 199, 35);
+  background-color: #fbc000;
 }
+
+
+.alert{
+  color: red;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+
+
 
 
 @media screen and (max-width: 33rem) {

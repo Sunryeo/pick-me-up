@@ -9,7 +9,7 @@ const FeedContent = ({feed, handleSelect}) => {
             <img className={styles.image} src={feed.image_1} alt="option1"/>
             <img className={styles.image} src={feed.image_2} alt="option2"/>
           </div>
-          <div className={styles.title}>{feed.title}</div>
+          <h1 className={styles.title}>{feed.title}</h1>
 
           <div className={styles.categories}>
             {feed.tags.map(el => <span className={styles.hashtag}>{el}</span>)}

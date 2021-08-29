@@ -2,24 +2,15 @@ import styles from './Myinfo.module.css';
 
 import React, { useState } from 'react';
 import MyinfoModify from '../myinfoModify/MyinfoModify';
+import MypageModifyNull from '../MypageModifyNull';
 
-const Myinfo = (props) => {
-
-
+const Myinfo = ({info,setInfo}) => {
+    if(info){  
+        const {userid, nickname, mobile} = info;
+    }
+  
     /* 내정보수정이동*/
     const [isModifyClicked, setIsModifyClicked] = useState(false);
-    const [info, setInfo] = useState({
-        '1':{
-            id: "",
-            nickname: "",
-            mobile: "",
-            password: "",
-            passwordConfirm: "",
-        }
-    })
-
-
-
     //수정하기 버튼 클릭시 이동 
     const handleClickModify = () => {
         setIsModifyClicked(true);
@@ -39,16 +30,26 @@ const Myinfo = (props) => {
                 <div className={styles.textbox}>
                     <div className={styles.ulbox}>
                         <span className={styles.list}>
-                            아이디:
-                            <input className={styles.input} value="tkdkagody" readOnly></input>
+                        아이디:
+                        {info === null ?
+                              <input className={styles.input} value="info없는경우" readOnly></input> 
+                                : <input className={styles.input} value={info.userid} readOnly></input>
+                        }
                         </span>
                         <span className={styles.list}>
                             닉네임:
-                            <input className={styles.input} value="pickme" readOnly></input>
+                            {info === null ?
+                              <input className={styles.input} value="수정버튼/취소버튼 막기" readOnly></input> 
+                                :  <input className={styles.input} value={info.nickname} readOnly></input>
+                            }
                         </span>
                         <span className={styles.list}>
                             모바일:
-                            <input className={styles.input} value="010-0000-0000" readOnly></input>
+                            {info === null ?
+                              <input className={styles.input} value="nullpage띄우기" readOnly></input> 
+                                :  <input className={styles.input} value={info.mobile} readOnly></input>
+                            }
+                            
                         </span>
                     </div>
                 </div>
@@ -64,11 +65,20 @@ const Myinfo = (props) => {
             </div>
         </>
         :
-        <MyinfoModify 
-        isModifyClicked={isModifyClicked} 
-        setIsModifyClicked={setIsModifyClicked}
-        info={info} 
-        setInfo={setInfo}/>
+        <>
+        {
+           
+        info ?
+            <MyinfoModify 
+            isModifyClicked={isModifyClicked} 
+            setIsModifyClicked={setIsModifyClicked}
+            info={info} 
+            setInfo={setInfo}/>
+        : <MypageModifyNull />   
+        
+        }
+        </>
+
         }
 
        </>

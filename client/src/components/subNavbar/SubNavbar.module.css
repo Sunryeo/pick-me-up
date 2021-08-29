@@ -9,15 +9,20 @@
   cursor: pointer;
   border: 1px solid rgb(210, 210, 210);
   border-radius: 20px;
-  padding: 0.5rem 0.8rem;
-  font-size: 0.8rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.7rem;
   margin-right: 0.3rem;
 }
 
-.hashtag:hover {
-  border: none;
+.hashtagClicked {
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.7rem;
+  margin-right: 0.3rem;
   color: white;
-  background-color: black;
+  border: 1px solid rgb(48, 48, 48);
+  background-color: rgb(48, 48, 48);
+  border-radius: 20px;
 }
 
 .writingBtn {
@@ -36,19 +41,17 @@
   font-weight: bold;
   color: white;
 }
-.feedList{
-  border: 1px solid red; 
+.feedList {
+  border: 1px solid red;
 }
-
-
 
 @media screen and (max-width: 33rem) {
   .categories {
-    width : 100%;
+    width: 100%;
   }
   /*li 태그 확인 */
-  .feedList{
-    border: 1px solid red; 
+  .feedList {
+    border: 1px solid red;
     width: 100%;
   }
 }

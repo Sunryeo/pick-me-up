@@ -1,3 +1,8 @@
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
 .main {
   margin: 0 auto;
   width: 500px;
@@ -12,15 +17,9 @@
   align-items: center;
 }
 
-
-
-
-
-
 @media screen and (max-width: 33rem) {
   .main {
     margin: 0 auto;
     width: 470px;
   }
-
 }
