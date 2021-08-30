@@ -3,9 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-
-
-
 const Mycontent = ({handleContent}) => {
     const dummyData = [
       {userName: "구름이",
@@ -39,14 +36,16 @@ const Mycontent = ({handleContent}) => {
       isMoreOpt(!moreOpt);
     }
 
-    const deleteHandle = () => {
+    const deleteHandle = (el) => {
       // 피드테이블에서 레코드 삭제하는 axios DELETE 요청(지영)
       // 삭제 후 feeds 상태가 자동으로 변화되어 myfeeds 상태값도 바로 변화되는지 확인해봐야 함.
       // 삭제 후 myContent 컴포넌트로 redirect 필요.
+      // el.id를 payload에 보내야 함(삭제할 피드의 피드아이디)
     }
 
     useEffect(() => {
       //myFeeds 불러오기 axios GET 요청(지영)
+      //불러온 data를 setMyFeeds 상태값에 넣어야 함.
     }, []) // 빈배열을 빼고 myFeeds 상태값을 넣어야 할 수도 있음.
 
     return(
@@ -63,10 +62,10 @@ const Mycontent = ({handleContent}) => {
                       <span className={styles.title}>{el.title}</span>
                       <i className="fas fa-ellipsis-h" onClick={()=>handleOptions(el)}>
                         <ul className={styles.more}>
-                          <Link to="/writing">
+                          <Link to="/update">
                             <li className={styles.moreOpt} onClick={()=>handleContent(el)}>수정</li>
                           </Link>
-                            <li className={styles.moreOpt} onClick={deleteHandle}>삭제</li>
+                            <li className={styles.moreOpt} onClick={()=>deleteHandle(el)}>삭제</li>
                         </ul>
                       </i>
                     </div>

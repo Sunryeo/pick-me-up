@@ -26,11 +26,9 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(
       cors({
-
-         origin: ["http://localhost:3000"],
-
+        origin: ["http://localhost:3000"],
         credentials: true,
-        methods: ["GET", "POST", "OPTIONS"],
+        methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
       })
     ); // 응답 상태 200으로 설정}));
     this.app.use(cookieParser());
@@ -42,7 +40,7 @@ class App {
 
   status404() {
     this.app.use((req, res, _) => {
-      res.status(404);
+      res.status(404).send("Page Not Found");
     });
   }
 

@@ -47,6 +47,7 @@
 .title {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  margin-left: 0.3rem;
   font-weight: bold;
   border-bottom: 1px solid rgb(225, 225, 225);
 }
@@ -83,4 +84,15 @@
   text-align: right;
   font-size: 0.68rem;
   margin-bottom: 0.5rem;
+  margin-right: 0.3rem;
+}
+
+@media screen and (max-width: 33rem) {
+  .container {
+    /*최상위 바디 컨테이너*/
+    width: 100%;
+  }
+  .images {
+    width: 100%;
+  }
 }

@@ -1,7 +1,7 @@
-.container{
-    /*최상위 바디 컨테이너*/
-    width: 500px;
-    margin:0 auto;
+.container {
+  /*최상위 바디 컨테이너*/
+  width: 500px;
+  margin: 0 auto;
 }
 .category {
   margin-bottom: 3rem;
@@ -24,10 +24,9 @@
   cursor: pointer;
 }
 .myinfosub,
-.mycontentsub  {
+.mycontentsub {
   border-bottom: 2px solid black;
 }
-
 
 .mycontent,
 .mycontentsub {
@@ -45,12 +44,13 @@
   color: grey;
 }
 
-
 @media screen and (max-width: 33rem) {
-  .container{
+  .container {
     /*최상위 바디 컨테이너*/
-    width: 470px;
-    margin:0 auto;
-}
-
+    width: 100%;
+    margin: 0 auto;
+  }
+  .body {
+    width: 100%;
+  }
 }

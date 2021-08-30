@@ -11,43 +11,25 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
     mobile: "",
     password: "",
     password2: "",
-    signUpType: false, //admin?
+    // signUpType:""  //admin?
   });
 
   //에러메세지 상태
   const [errorMessage, setErrorMessage] = useState("");
-  const { userId, userName, mobile, password, password2, signUpType } =
-    userinfo;
+  const { userId, userName, mobile, password, password2 } = userinfo;
   const handleSignup = () => {
     if (!userId || !userName || !mobile || !password || !password2) {
       setErrorMessage("모든 항목을 입력해주세요");
     } else {
       setErrorMessage("");
-
       const userData = {
-        userId,
+        userId: userId,
         password: password,
         userName: userName,
         mobile: mobile,
-        signUpType: signUpType,
+        // signUpType:signUpType,
       };
       // http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/
-      // axios
-      //   .post(
-      //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
-      //     userData,
-      //     {
-      //       "Content-Type": "application/json",
-      //       withCredentials: true,
-      //     }
-      //   )
-      //   .then((result) => {
-      //     console.log(result);
-      //     // if(result.data.message === "successfully created"){
-      //     //       clickCloseAll();
-      //     //       //회원가입완료 모달 띄우면 좋을것 같음
-      //     // }
-      //   });
       axios
         .post(
           "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
@@ -57,8 +39,12 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
             withCredentials: true,
           }
         )
-        .then((res) => {
-          console.log(res);
+        .then((result) => {
+          console.log(result);
+          if (result.data.message === "ok") {
+            clickCloseAll();
+            //회원가입완료 모달 띄우면 좋을것 같음
+          }
         });
     }
   };
@@ -112,7 +98,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
             </li>
             <li className={styles.item}>
               <input
-                type="text"
+                type="password"
                 onChange={handleInputValue("password")}
                 className={styles.text}
                 placeholder="비밀번호를 입력하세요"
@@ -120,7 +106,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
             </li>
             <li className={styles.item}>
               <input
-                type="text"
+                type="password"
                 onChange={handleInputValue("password2")}
                 className={styles.text}
                 placeholder="비밀번호를 확인해주세요"

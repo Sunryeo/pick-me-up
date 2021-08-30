@@ -12,10 +12,10 @@ const Footer = (props) => {
 
         <ul className={styles.info}>
           <li className={styles.name}>
-              <span>문순려 [back end] </span>
-              <span>이동욱 [back end] </span>
-              <span>유다희 [frontend]] </span>
-              <span>박지영 [frontend]] </span>
+              <span>문순려 [back-end] </span>
+              <span>이동욱 [back-end] </span>
+              <span>유다희 [front-end] </span>
+              <span>박지영 [front-end] </span>
           </li>
         </ul>
       </div>

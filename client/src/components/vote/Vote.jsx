@@ -1,5 +1,5 @@
 import React from 'react';
-import RealVote from '../realVote/RealVote';
+import RealVote from '../modals/RealVote';
 import styles from './Vote.module.css';
 
 

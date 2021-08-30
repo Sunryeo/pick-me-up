@@ -16,7 +16,7 @@
   object-fit: cover;
 }
 .title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 0.2rem;
   margin-left: 0.3rem;
   font-weight: bold;
@@ -43,7 +43,8 @@
 
 @media screen and (max-width: 33rem) {
   .container {
-    width: 470px;
+    width: 100%;
+    /* margin: 0 auto; */
   }
   .img {
     width: 100%;

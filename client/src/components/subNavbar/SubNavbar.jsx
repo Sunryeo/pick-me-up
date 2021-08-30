@@ -12,12 +12,12 @@ const SubNavbar = ({filterHandle}) => {
     filterHandle(el);
   }
 
-  useEffect(() => {
-    filterHandle('전체')
-  }, []) //default로 전체 피드 보여주기.
+  // useEffect(() => {
+  //   filterHandle('전체')
+  // }, []) //default로 전체 피드 보여주기.
 
   return (
-    <>
+    <div className={styles.outCategory}>
       <div className={styles.categories}>
         {tags.map(el => <span className={el===tagClicked? styles.hashtagClicked :styles.hashtag} onClick={()=>tagHandle(el)}>{el}</span>)}
       </div>
@@ -28,8 +28,7 @@ const SubNavbar = ({filterHandle}) => {
       </div>
     
     
-    </>
+    </div>
   )
 }
 export default SubNavbar;
-

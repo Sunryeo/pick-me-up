@@ -1,45 +1,43 @@
-const { post } = require('../models');
-const jwt = require('jsonwebtoken');
+const { post } = require("../models");
+// const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const e = require('express');
+const { isAuthorized } = require("../controllers/tokenFunction");
 
 module.exports = {
-    getMyPost: async (req, res) => {
-        const Authentication = await req.headers.Authentication;
-        
-        if(!Authentication) {
-            res.status(401).send({ "data": null, "message": "invalid access token" })
-        }
-        else {
-            const token = Authentication.split(' ')[1];
-            const data = jwt.verify(token, process.env.ACCESS_SECRET);
-            if(!data) {
-                res.status(401).send({ "data": null, "message": "invalid access token" })
-            }
-            else {
-                const postsList = post.findAll({
-                    where: {
-                        user_id: req.params.id
-                    }
-                });
-                if(!postsList) {
-                    return res.status(404).send({ "data": null, "message": "user not exists" });
-                }
-                else {
-                    return res.status(200).send({ "data": postsList, "message": "ok" });
-                }
-            }
-        }
+  getMyPost: (req, res) => {
+    const accessTokendata = isAuthorized(req);
+    const user_id = req.params.id;
 
-        // post.findAll({
-        //     where: {
-        //         user_id: req.params.id
-        //     }
-        // })
-        // .then(result => {
-        //     if(!result) {
-        //         return res.status(404).send({ "data": null, "message": "user not exists" });
-        //     }
-        // })
+    if (!accessTokendata) {
+      res.status(401).send({ data: null, message: "invalid access token" });
+    } else {
+      post
+        .findAll({
+          where: {
+            user_id: user_id,
+          },
+        })
+        .then((postList) => {
+          if (!postList) {
+            return res
+              .status(404)
+              .send({ data: null, message: "posts not exist" });
+          } else {
+            console.log("postList", postList);
+            return res.status(200).send({ data: postList, message: "ok" });
+          }
+        });
     }
-}
+
+    // post.findAll({
+    //     where: {
+    //         user_id: req.params.id
+    //     }
+    // })
+    // .then(result => {
+    //     if(!result) {
+    //         return res.status(404).send({ "data": null, "message": "user not exists" });
+    //     }
+    // })
+  },
+};

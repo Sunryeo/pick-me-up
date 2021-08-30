@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Vote from '../../components/vote/Vote';
 import VoteResult from '../../components/voteResult/VoteResult';
 import styles from './Feed.module.css';
-import RealVote from '../../components/realVote/RealVote';
+import RealVote from '../../components/modals/RealVote';
 
 
 const Feed = ({feed}) => {

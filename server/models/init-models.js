@@ -1,39 +1,31 @@
 var DataTypes = require("sequelize").DataTypes;
 var _comments = require("./comments");
 var _post = require("./post");
-var _post_tags = require("./post_tags");
-var _tags = require("./tags");
 var _users = require("./users");
-var _vote = require("./vote");
+var _voter = require("./voter");
 
 function initModels(sequelize) {
   var comments = _comments(sequelize, DataTypes);
   var post = _post(sequelize, DataTypes);
-  var post_tags = _post_tags(sequelize, DataTypes);
-  var tags = _tags(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
-  var vote = _vote(sequelize, DataTypes);
+  var voter = _voter(sequelize, DataTypes);
 
-  comments.belongsTo(post, { as: "post", foreignKey: "post_id"});
-  post.hasMany(comments, { as: "comments", foreignKey: "post_id"});
-  post_tags.belongsTo(post, { as: "post", foreignKey: "post_id"});
-  post.hasMany(post_tags, { as: "post_tags", foreignKey: "post_id"});
-  vote.belongsTo(post, { as: "post", foreignKey: "post_id"});
-  post.hasMany(vote, { as: "votes", foreignKey: "post_id"});
-  post_tags.belongsTo(tags, { as: "tag", foreignKey: "tag_id"});
-  tags.hasMany(post_tags, { as: "post_tags", foreignKey: "tag_id"});
-  comments.belongsTo(users, { as: "user", foreignKey: "user_id"});
-  users.hasMany(comments, { as: "comments", foreignKey: "user_id"});
-  post.belongsTo(users, { as: "user", foreignKey: "user_id"});
-  users.hasMany(post, { as: "posts", foreignKey: "user_id"});
+  comments.belongsTo(post, { as: "feed", foreignKey: "feedId"});
+  post.hasMany(comments, { as: "comments", foreignKey: "feedId"});
+  voter.belongsTo(post, { as: "voting", foreignKey: "voting_id"});
+  post.hasMany(voter, { as: "voters", foreignKey: "voting_id"});
+  comments.belongsTo(users, { as: "user", foreignKey: "userId"});
+  users.hasMany(comments, { as: "comments", foreignKey: "userId"});
+  post.belongsTo(users, { as: "user", foreignKey: "userid"});
+  users.hasMany(post, { as: "posts", foreignKey: "userid"});
+  voter.belongsTo(users, { as: "user", foreignKey: "user_id"});
+  users.hasMany(voter, { as: "voters", foreignKey: "user_id"});
 
   return {
     comments,
     post,
-    post_tags,
-    tags,
     users,
-    vote,
+    voter,
   };
 }
 module.exports = initModels;

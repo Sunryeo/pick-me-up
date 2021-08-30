@@ -1,11 +1,15 @@
-const { users, post } = require("../../models");
+const { vote, post: postModel } = require("../../models");
 
 module.exports = {
   getAllPost: async (req, res) => {
-    const result = await post.findAll();
-    const data = result.map((obj) => {
+    const postResult = await postModel.findAll({
+      include: vote,
+    });
+
+    const postData = postResult.map((obj) => {
       return obj.dataValues;
     });
-    console.log(data);
+
+    console.log(postData);
   },
 };

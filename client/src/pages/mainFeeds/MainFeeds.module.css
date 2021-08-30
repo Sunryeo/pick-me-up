@@ -20,6 +20,9 @@ a:visited {
 @media screen and (max-width: 33rem) {
   .main {
     margin: 0 auto;
-    width: 470px;
+    width: 100%;
+  }
+  .feedList {
+    width: 100%;
   }
 }

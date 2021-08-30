@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
-  const comments = sequelize.define(
-    "comments",
+  const voter = sequelize.define(
+    "voter",
     {
       id: {
         autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      feedId: {
+      voting_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      userId: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -25,22 +25,14 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      textContent: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-      },
-      created_at: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
-      updated_at: {
-        type: DataTypes.DATE,
+      options_check: {
+        type: DataTypes.BOOLEAN,
         allowNull: true,
       },
     },
     {
       sequelize,
-      tableName: "comments",
+      tableName: "voter",
       timestamps: false,
       indexes: [
         {
@@ -50,22 +42,21 @@ module.exports = function (sequelize, DataTypes) {
           fields: [{ name: "id" }],
         },
         {
-          name: "feedId",
+          name: "user_id",
           using: "BTREE",
-          fields: [{ name: "feedId" }],
+          fields: [{ name: "user_id" }],
         },
         {
-          name: "userId",
+          name: "voting_id",
           using: "BTREE",
-          fields: [{ name: "userId" }],
+          fields: [{ name: "voting_id" }],
         },
       ],
     }
   );
-  comments.associate = function (models) {
-    comments.belongsTo(models.post, { as: "feed", foreignKey: "feedId" });
-    comments.belongsTo(models.users, { as: "user", foreignKey: "userId" });
+  voter.associate = function (models) {
+    voter.belongsTo(models.post, { as: "voting", foreignKey: "voting_id" });
+    voter.belongsTo(models.users, { as: "user", foreignKey: "user_id" });
   };
-
-  return comments;
+  return voter;
 };

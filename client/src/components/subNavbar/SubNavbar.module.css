@@ -1,8 +1,17 @@
+/* .outCategory {
+  overflow-x: hidden;
+} */
 .categories {
-  height: 4rem;
+  height: 3.5rem;
   display: flex;
   align-items: center;
   margin-top: 1rem;
+  margin-left: 0.5rem;
+  /* position: sticky;
+  background-color: white;
+  top: 90px; */
+  width: 500px;
+  overflow: hidden;
 }
 
 .hashtag {
@@ -31,6 +40,7 @@
 }
 
 .button {
+  margin-right: 0.5rem;
   cursor: pointer;
   border: none;
   padding: 0.4rem 1rem;
@@ -43,15 +53,4 @@
 }
 .feedList {
   border: 1px solid red;
-}
-
-@media screen and (max-width: 33rem) {
-  .categories {
-    width: 100%;
-  }
-  /*li 태그 확인 */
-  .feedList {
-    border: 1px solid red;
-    width: 100%;
-  }
 }
