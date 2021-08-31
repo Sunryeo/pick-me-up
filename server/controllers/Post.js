@@ -4,18 +4,10 @@ const { isAuthorized } = require("./tokenFunction");
 module.exports = {
   sendPost: (req, res) => {
     const accessTokendata = isAuthorized(req);
-    const { title, contents, choice_1, choice_2, img_1, img_2 /*hashTags*/ } =
+    const { title, contents, choice_1, choice_2, img_1, img_2, hashTags } =
       req.body;
     console.log(accessTokendata);
-    console.log(
-      title,
-      contents,
-      choice_1,
-      choice_2,
-      /*hashTags,*/
-      img_1,
-      img_2
-    );
+    console.log(title, contents, choice_1, choice_2, hashTags, img_1, img_2);
     if (!accessTokendata) {
       res.status(401).send("invalid");
     } else {
@@ -25,8 +17,8 @@ module.exports = {
         !choice_1 ||
         !choice_2 ||
         !img_1 ||
-        !img_2 /*||
-        !hashTags*/
+        !img_2 ||
+        !hashTags
       ) {
         res
           .status(422)
@@ -43,7 +35,7 @@ module.exports = {
             option2: choice_2,
             option1_count: 0,
             option2_count: 0,
-            //tags: hashTags,
+            tags: hashTags,
             created_at: new Date(),
             updated_at: new Date(),
           })
