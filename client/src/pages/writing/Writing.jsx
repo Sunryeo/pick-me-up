@@ -7,7 +7,7 @@ import AWS from "aws-sdk"
 
 axios.defaults.withCredentials = true;
 
-const Writing = ({accessToken, isLogin, feedList, feedsHandle}) => {
+const Writing = ({accessToken, isLogin}) => {
 
   const tags=['#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
 

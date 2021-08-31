@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      userid: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -70,18 +70,18 @@ module.exports = function (sequelize, DataTypes) {
           fields: [{ name: "id" }],
         },
         {
-          name: "userid",
+          name: "user_id",
           using: "BTREE",
-          fields: [{ name: "userid" }],
+          fields: [{ name: "user_id" }],
         },
       ],
     }
   );
-
   post.associate = function (models) {
-    post.hasMany(models.comments, { as: "comments", foreignKey: "feedId" });
+    post.hasMany(models.comments, { as: "comments", foreignKey: "post_id" });
     post.hasMany(models.voter, { as: "voters", foreignKey: "voting_id" });
-    post.belongsTo(models.users, { as: "user", foreignKey: "userid" });
+
+    post.belongsTo(models.users, { as: "user", foreignKey: "user_id" });
   };
 
   return post;

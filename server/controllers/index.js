@@ -6,6 +6,7 @@ const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
 const { getMyInfo } = require("./GetMyInfo");
+const { updateMyPost } = require("./UpdateMyPost");
 const { sendPost } = require("../controllers/Post");
 const { getAllPost } = require("./MainPage");
 const { isVote } = require("./Vote");
@@ -102,5 +103,7 @@ router.get("/", (req, res) => {
 router.get("/user/posting-list/:id", getMyPost);
 
 router.get("/user/:id", getMyInfo);
+
+router.post("/user/posting-list/:postid", updateMyPost);
 
 module.exports = router;

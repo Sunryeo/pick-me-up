@@ -47,11 +47,11 @@ const Feed = ({feed}) => {
           </div>
           <div className={styles.title}>{feed.title}</div>
           <div className={styles.user}>
-            <div>{feed.createdAt}</div>
-            <div>by {feed.userName}</div>
+            <div>{feed.created_at}</div>
+            <div>by 유저닉네임</div>
           </div>
-          <p className={styles.content}>{feed.content}</p>
-          <div className={styles.voteText}>{feed.votes}명이 투표했어요</div>
+          <p className={styles.content}>{feed.contents}</p>
+          <div className={styles.voteText}>N명이 투표했어요</div>
           {
             isVoted ?
             (<>

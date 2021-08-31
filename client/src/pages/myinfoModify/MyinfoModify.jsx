@@ -45,7 +45,7 @@ const MyinfoModify = ({
             id: info.userid,
           },
           headers: {
-            authorization: `${accessToken}`,
+            authorization: accessToken,
           },
           "Content-Type": "application/json",
         }
@@ -67,6 +67,7 @@ const MyinfoModify = ({
   };
   const realno = () => {
     setModifyYes(false);
+    history.push("/mypage");
   };
   const noModify = () => {
     //취소하기버튼
@@ -179,11 +180,11 @@ const MyinfoModify = ({
               </div>
             </div>
 
-            <div className={styles.btns1}>
-              <button className={styles.btn2} onClick={noModify}>
+            <div className={styles.btns}>
+              <button className={styles.btn} onClick={noModify}>
                 취소?
               </button>
-              <button className={styles.btn2} onClick={doneModify}>
+              <button className={styles.btn} onClick={doneModify}>
                 수정완료
               </button>
             </div>

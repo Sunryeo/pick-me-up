@@ -77,7 +77,7 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
             </li>
             <li className={styles.item}>
               <input
-                type="text"
+                type="password"
                 className={styles.text}
                 onChange={handleInputValue("password")}
                 placeholder="비밀번호를 입력하세요"
@@ -93,6 +93,7 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
                 Sign in
               </button>
             </li>
+
             <li className={styles.item}>
               <button className={styles.button}>Google</button>
             </li>

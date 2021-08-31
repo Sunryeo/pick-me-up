@@ -8,7 +8,6 @@ import {
   useHistory,
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
-
 import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
 import Mypage from "./pages/mypage/Mypage";
@@ -27,36 +26,35 @@ import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
-
   const dummyData = [
     {
       userName: "구름이",
       title: "회사에 입고 다닐 데일리 니트 색깔 골라주세요🙏",
-      option_1: "살구",
-      option_2: "네이비",
-      image_1:
+      option1: "살구",
+      option2: "네이비",
+      imgInfo1:
         "https://image.thehyundai.com/static/4/8/3/37/A1/hnm40A1373847_01_0989040_003_003_1600.jpg",
-      image_2:
+      imgInfo2:
         "https://image.thehyundai.com/static/4/8/3/37/A1/hnm40A1373849_01_0989040_012_001_1600.jpg",
-      content:
+      contents:
         "봄이 다가오고 있어서 화사한 살구색으로 사고 싶은데... 제가 요즘에 급격히 살이 쪄서(ㅠㅠ😭)ㅋㅋㅋㅋ 뚱뚱해 보일까바 선뜻 지르기가 고민되네요... 안전하게 네이비 고를까요??? 참고로 저는 옷이 몇 개 없어용🥲 자주 입을만한 니트로 고르고 있습니다!",
       tags: ["#의류", "#뷰티", "#리빙"],
       votes: "N",
-      createdAt: "2021-08-27",
+      created_at: "2021-08-27",
     },
     {
       userName: "구름이",
       title: "춘식이 무드등 어떤 게 더 귀엽나요!?👀",
-      option_1: "냥냥펀치",
-      option_2: "뚱춘식",
-      image_1:
+      option1: "냥냥펀치",
+      option2: "뚱춘식",
+      imgInfo1:
         "https://t1.kakaocdn.net/friends/prod/product/20210818173346267_8809814920335_BW_08.jpg",
-      image_2:
+      imgInfo2:
         "https://imgc.1300k.com/aaaaaib/goods/215026/27/215026279751.jpg?10",
-      content: "발바닥도 귀엽고 뚱춘식도 귀엽다 ㅠㅠ! ❤️",
+      contents: "발바닥도 귀엽고 뚱춘식도 귀엽다 ㅠㅠ! ❤️",
       tags: ["#잡화", "#리빙"],
       votes: "N",
-      createdAt: "2021-08-27",
+      created_at: "2021-08-27",
     },
   ];
 
@@ -70,7 +68,7 @@ function App() {
   const isAuthenticated = () => {
     // axios
     //   .get(
-    //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/userdata",
+    //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/:id",
     //     {
     //       headers: {
     //         authorization: `Bearer ${accessToken}`,
@@ -97,7 +95,6 @@ function App() {
       password: "",
       password2: "",
     });
-
   };
   console.log(isLogin);
   //로그인 성공시 리스폰스
@@ -114,12 +111,15 @@ function App() {
   const [feeds, setFeeds] = useState(dummyData); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
-  
-  const select = (el) => { //해당 피드로 이동...
+
+  const select = (el) => {
+    //해당 피드로 이동...
     setSelectedFeed(el);
   };
   const listFilter = (tag) => {
-    //필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
+    // 필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
+    // feeds에서 전체 리스트 GET받고(필터링을 서버에서 하는 게 아님), 
+    // 아래 조건문에 따라 필터링 시키기.
     // if(tag === '전체'){
     //   //setFeeds(feeds);
     // }else{
@@ -127,7 +127,7 @@ function App() {
     // }
   };
 
-  const revise = (el) => {
+  const revise = (el) => { //update할 포스트 정보 상태에 끼워넣고 /update페이지로 보내주기.
     setRevised(el);
   };
 
@@ -137,14 +137,28 @@ function App() {
 
   useEffect(() => {
     //feeds 불러오기 axios GET 요청(지영)
-    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
-    
-    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post', 
+
+    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds
+    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post',
     // { withCredentials: true })
     // .then(res => {
     //   console.log(res)
-    // })   
+    // })
+  }, []);
+
+    //최신순으로 불러와야 하니까 받은 data에서 createdAt이 최신인 순으로 정렬해서 feeds 
+    
+    // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
+    // .then(res => {
+    //   const result = res.data.data;
+    //   result.sort((a,b)=>{
+    //     return new Date(b.created_at) - new Date(a.created_at);
+    //   });
+    //   setFeeds(result);
+    // })
+    console.log('hi')
   }, [])
+
 
 
 
@@ -179,8 +193,8 @@ function App() {
       loginHandler();
       setAccessToken(window.localStorage.getItem("accessToken"));
     }
+    
   }, [accessToken]);
-
 
   return (
     <>
@@ -229,8 +243,6 @@ function App() {
                 <Writing
                   accessToken={accessToken}
                   isLogin={isLogin}
-                  feedList={feeds}
-                  feedsHandle={createFeeds}
                 />
               </Route>
               <Route path="/update">
@@ -251,7 +263,6 @@ function App() {
       {/* } */}
     </>
   );
-
 }
 
 export default App;

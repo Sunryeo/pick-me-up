@@ -26,7 +26,10 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(
       cors({
-        origin: ["http://localhost:3000"],
+        origin: [
+          "http://localhost:3000",
+          "http://pickmeup-client.s3-website.ap-northeast-2.amazonaws.com",
+        ],
         credentials: true,
         methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
       })

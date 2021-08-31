@@ -54,8 +54,10 @@ module.exports = function (sequelize, DataTypes) {
       ],
     }
   );
+
   voter.associate = function (models) {
     voter.belongsTo(models.post, { as: "voting", foreignKey: "voting_id" });
+
     voter.belongsTo(models.users, { as: "user", foreignKey: "user_id" });
   };
   return voter;

@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true;
 
 const Update = ({feed}) => {
 
-  //feed가 null일 때 어떠한 컴포넌트라도 보여야 함!
+  //feed가 null일 때 어떠한 컴포넌트라도 보여야 함!(버그)
 
   const tags=['#의류', '#리빙', '#뷰티', '#식품', '#잡화', '#디지털']
 
@@ -129,12 +129,17 @@ const Update = ({feed}) => {
     </div>
 
     <div className={styles.submit}>
-      <button className={styles.submitBtn} onClick={updateFeedHandle}>등록</button>
-      <Link to="/mypage">
-        <button className={styles.submitBtn}>취소</button>
-      </Link>
-    </div>
-    <div className={styles.error}>{errorMessage}</div>
+          {title === '' || firstOpt === '' || secondOpt ==='' || firstImg === null || secondImg === null || content === '' || isClicked.length === 0 ? 
+            <button className={styles.submitBtn} onClick={updateFeedHandle}>등록</button>
+          : 
+          <Link to="/">
+            <button className={styles.submitBtn} onClick={updateFeedHandle}>등록</button>
+          </Link>}
+          <Link to="/mypage">
+            <button className={styles.submitBtn}>취소</button>
+          </Link>
+        </div>
+        <div className={styles.error}>{errorMessage}</div>
   
   </section>
   )

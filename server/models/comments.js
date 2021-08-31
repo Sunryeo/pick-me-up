@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      feedId: {
+      post_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      userId: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      textContent: {
+      text_content: {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
@@ -50,21 +50,22 @@ module.exports = function (sequelize, DataTypes) {
           fields: [{ name: "id" }],
         },
         {
-          name: "feedId",
+          name: "post_id",
           using: "BTREE",
-          fields: [{ name: "feedId" }],
+          fields: [{ name: "post_id" }],
         },
         {
-          name: "userId",
+          name: "user_id",
           using: "BTREE",
-          fields: [{ name: "userId" }],
+          fields: [{ name: "user_id" }],
         },
       ],
     }
   );
+
   comments.associate = function (models) {
-    comments.belongsTo(models.post, { as: "feed", foreignKey: "feedId" });
-    comments.belongsTo(models.users, { as: "user", foreignKey: "userId" });
+    comments.belongsTo(models.post, { as: "post", foreignKey: "post_id" });
+    comments.belongsTo(models.users, { as: "user", foreignKey: "user_id" });
   };
 
   return comments;

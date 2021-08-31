@@ -10,14 +10,14 @@ function initModels(sequelize) {
   var users = _users(sequelize, DataTypes);
   var voter = _voter(sequelize, DataTypes);
 
-  comments.belongsTo(post, { as: "feed", foreignKey: "feedId"});
-  post.hasMany(comments, { as: "comments", foreignKey: "feedId"});
+  comments.belongsTo(post, { as: "post", foreignKey: "post_id"});
+  post.hasMany(comments, { as: "comments", foreignKey: "post_id"});
   voter.belongsTo(post, { as: "voting", foreignKey: "voting_id"});
   post.hasMany(voter, { as: "voters", foreignKey: "voting_id"});
-  comments.belongsTo(users, { as: "user", foreignKey: "userId"});
-  users.hasMany(comments, { as: "comments", foreignKey: "userId"});
-  post.belongsTo(users, { as: "user", foreignKey: "userid"});
-  users.hasMany(post, { as: "posts", foreignKey: "userid"});
+  comments.belongsTo(users, { as: "user", foreignKey: "user_id"});
+  users.hasMany(comments, { as: "comments", foreignKey: "user_id"});
+  post.belongsTo(users, { as: "user", foreignKey: "user_id"});
+  users.hasMany(post, { as: "posts", foreignKey: "user_id"});
   voter.belongsTo(users, { as: "user", foreignKey: "user_id"});
   users.hasMany(voter, { as: "voters", foreignKey: "user_id"});
 
