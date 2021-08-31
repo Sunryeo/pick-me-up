@@ -1,11 +1,9 @@
 import React from 'react';
-import RealVote from '../modals/RealVote';
-import Vote from '../vote/Vote';
 import styles from './VoteResult.module.css';
 import Feed from '../../pages/feed/Feed';
 
+
 const VoteResult = ({feed, isVoted,setIsVoted}) => {
-console.log(isVoted)
 
   const voteDate = {
     per1 : {
@@ -24,7 +22,7 @@ console.log(isVoted)
 
   return  (
     <>
-    {isVoted ?
+    {isVoted ? //모달창 닫고 
       <Feed feed={feed}/>
       :
     (
@@ -36,9 +34,9 @@ console.log(isVoted)
       </div>
 
       <div className={styles.images}>
-        <img className={styles.image} src="../../../images/face.svg" alt="option1" />
+        <img className={styles.image} src={feed.imgInfo1} alt="option1" />
       
-        <img className={styles.image} src="../../../images/face.svg" alt="option1" />
+        <img className={styles.image} src={feed.imgInfo2} alt="option2" />
       </div>
 
       <div className={styles.graph}>
@@ -46,19 +44,17 @@ console.log(isVoted)
           <label className={styles.percent} >{voteDate.per1.percent}%</label>
           <label className={styles.img1} style={{width: `${voteDate.per1.percent}%`}}></label>
         </span>
-        <span className={styles.title}>살구</span>
+        <span className={styles.title}>{feed.option1}</span>
         <span className={styles.imgbox}>
           <label className={styles.percent}>{voteDate.per2.percent}%</label>
           <label className={styles.img2}   style={{width: `${voteDate.per2.percent}%`}}></label>
         </span>
-        <span className={styles.title}>네이비</span>
+        <span className={styles.title}>{feed.option2}</span>
       </div>
      
      
     </section>
-    )
-    }
-    
+    )}
     </>
   );
 }

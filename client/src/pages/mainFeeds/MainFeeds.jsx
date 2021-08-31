@@ -6,22 +6,16 @@ import FeedContent from '../../components/feedContent/FeedContent';
 
 
 const MainFeeds = ({feeds, filterHandle, handleClick}) => {
+  
   return (
-  <section className={styles.main}>
-    <SubNavbar filterHandle={filterHandle}/>
-    <ul className={styles.feedList}>
-    <Link to="/feed">
-      {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
-    </Link>
-    <Link to="/feed">
-      {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
-    </Link>
-    <Link to="/feed">
-      {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
-    </Link>
-      
-    </ul>
-  </section>
+    <section className={styles.main}>
+      <SubNavbar filterHandle={filterHandle}/>
+      <ul className={styles.feedList}>
+      <Link to="/feed">
+        {feeds.map(el => <FeedContent feed={el} handleSelect={handleClick}/>)}
+      </Link>
+      </ul>
+    </section>
   )
 };
 

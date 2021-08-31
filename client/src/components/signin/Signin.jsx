@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import Signup from "../signup/Signup";
 import styles from "./Signin.module.css";
 import axios from "axios";
+import { useHistory } from "react-router";
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
-const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
+const Signin = ({
+  clickCloseBtn,
+  handleResponseSuccess,
+  setInfo,
+  handleGoogleResponse,
+}) => {
+  const history = useHistory();
   const [loginInfo, setLoginInfo] = useState({
     userId: "",
     password: "",
@@ -37,12 +44,19 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
           loginInfo
         )
         .then((result) => {
-          //console.log(result);
-          handleResponseSuccess(result.data); //result.data.message="ok"!!
-          clickCloseBtn(); //::제대로 받아왔을경우 사인인창 없애기
+          if (result.data.message === "ok") {
+            window.localStorage.setItem(
+              "accessToken",
+              JSON.stringify(result.data.accessToken)
+              // result.data.accessToken
+            );
+            handleResponseSuccess(result.data); //result.data.message="ok"!!
+            clickCloseBtn(); //::제대로 받아왔을경우 사인인창 없애기
+            history.push("/");
+          }
         })
         .catch((err) => {
-          throw err;
+          setErrorMessage("가입하지 않은 사용자입니다");
         });
     }
   };
@@ -51,6 +65,7 @@ const Signin = ({ clickCloseBtn, handleResponseSuccess }) => {
     <section className={styles.backdrop}>
       {isSignUpClicked ? (
         <Signup
+          setInfo={setInfo}
           isSignUpClicked={isSignUpClicked}
           setIsSignUpClicked={setIsSignUpClicked}
           clickCloseBtn={clickCloseBtn}

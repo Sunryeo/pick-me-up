@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Signin from "../../components/signin/Signin";
@@ -10,6 +11,8 @@ const Navbar = ({
   info,
   filterHandle,
   isAuthenticated,
+  setInfo,
+  accessToken,
 }) => {
   //props로 isSignIn받고 true일경우 login/ false일경우 logout버튼
   const history = useHistory();
@@ -28,7 +31,30 @@ const Navbar = ({
   };
 
   const clickmypage = () => {
-    isAuthenticated();
+    axios
+      .get(
+        "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/:id",
+        {
+          params: {
+            // id: info.userid,
+          },
+          headers: {
+            authorization: accessToken,
+          },
+          "Content-Type": "application/json",
+        }
+      )
+      .then((result) => {
+        console.log(result);
+        // setInfo({
+        //   //인포상태 변화 //받아온 데이터로 넣어주기
+        //   userid: "abc1234",
+        //   nickname: "춘식",
+        //   mobile: "010-0000-0000",
+        //   password: "",
+        //   password2: "",
+        // });
+      });
     history.push("/mypage");
   };
 
@@ -39,6 +65,8 @@ const Navbar = ({
         <Signin
           clickCloseBtn={clickCloseBtn}
           handleResponseSuccess={handleResponseSuccess}
+          setInfo={setInfo}
+          accessToken={accessToken}
         />
       ) : null}
 

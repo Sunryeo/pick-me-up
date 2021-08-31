@@ -1,14 +1,16 @@
 import styles from "./RealVote.module.css";
 import React, { useState } from "react";
 
-const RealVote = ({ handleVote, setIsVoteReal }) => {
-  const clickNo = () => {
-    handleVote(false);
+const RealVote = ({ feed, handleVote, handleFeedVote, clickOptReset }) => {
+
+  const clickNo = () => { //투표 안 하기로 번복.
+    handleVote(); //모달창 닫기
+    clickOptReset(); //opt1 클릭된 상태 & op2클릭된 상태 리셋.
   };
 
-  const clickYes = () => {
-    handleVote(false);
-    setIsVoteReal(true);
+  const clickYes = (el) => { //투표하기로 결정.
+    handleVote(); //모달창 닫기
+    handleFeedVote(el); //투표한 피드 정보를 넘김
   };
 
   return (
@@ -19,7 +21,7 @@ const RealVote = ({ handleVote, setIsVoteReal }) => {
           <button className={styles.btn} onClick={clickNo}>
             아니오
           </button>
-          <button className={styles.btn} onClick={clickYes}>
+          <button className={styles.btn} onClick={()=>clickYes(feed)}>
             네
           </button>
         </span>

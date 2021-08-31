@@ -5,7 +5,7 @@ import NullPage from "../NullPage/Nullpage";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
-const Myinfo = ({ info, setInfo, accessToken, isLogin }) => {
+const Myinfo = ({ info, accessToken, isLogin }) => {
   const history = useHistory();
 
   const handleClickModify = () => {
@@ -32,7 +32,7 @@ const Myinfo = ({ info, setInfo, accessToken, isLogin }) => {
                   아이디:
                   <input
                     className={styles.input}
-                    value={info.userid}
+                    value="{info.userid}"
                     readOnly
                   ></input>
                 </span>
@@ -40,7 +40,7 @@ const Myinfo = ({ info, setInfo, accessToken, isLogin }) => {
                   닉네임:
                   <input
                     className={styles.input}
-                    value={info.nickname}
+                    value="{info.nickname}"
                     readOnly
                   ></input>
                 </span>
@@ -48,7 +48,7 @@ const Myinfo = ({ info, setInfo, accessToken, isLogin }) => {
                   모바일:
                   <input
                     className={styles.input}
-                    value={info.mobile}
+                    value="{info.mobile}"
                     readOnly
                   ></input>
                 </span>

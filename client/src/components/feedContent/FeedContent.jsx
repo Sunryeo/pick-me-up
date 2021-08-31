@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './FeedContent.module.css'
+import { Link } from "react-router-dom";
 
 const FeedContent = ({feed, handleSelect}) => {
+  const voteCount = feed.option1_count+feed.option2_count
   return (  
       <li className={styles.container} onClick={() => handleSelect(feed)}>
         <div className={styles.feed}>
@@ -14,7 +16,7 @@ const FeedContent = ({feed, handleSelect}) => {
           <div className={styles.categories}>
             {feed.tags.map(el => <span className={styles.hashtag}>{el}</span>)}
           </div>
-          <span className={styles.voteText}>N명이 투표했어요</span>
+          <span className={styles.voteText}>{voteCount}명이 투표했어요</span>
         </div> 
       </li>
   )

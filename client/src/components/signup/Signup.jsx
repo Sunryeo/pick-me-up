@@ -1,9 +1,11 @@
 import styles from "./Signup.module.css";
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router";
 
 // axios.defaults.withCredentials = true;
 const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
+  const history = useHistory();
   //가입정보 상태
   const [userinfo, setUserinfo] = useState({
     userId: "",
@@ -36,15 +38,20 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
           userData,
           {
             "Content-Type": "application/json",
-            withCredentials: true,
+            // withCredentials: true,
           }
         )
         .then((result) => {
-          console.log(result);
+          // console.log(result.data);
           if (result.data.message === "ok") {
             clickCloseAll();
             //회원가입완료 모달 띄우면 좋을것 같음
+            history.push("/");
           }
+        })
+        .catch((err) => {
+          //임시로 해뒀어요 요부분 나중에 고칠게요.. ㅠㅜ
+          setErrorMessage("사용중인 아이디입니다.");
         });
     }
   };

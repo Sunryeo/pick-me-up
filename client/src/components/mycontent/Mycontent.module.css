@@ -37,9 +37,9 @@
 }
 .titleAndBtn i {
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   margin-top: 0.3rem;
-  margin-right: 0.3rem;
+  margin-right: 0.7rem;
   position: relative;
 }
 
@@ -55,7 +55,7 @@
   padding: 0.2rem 0;
   color: grey;
   background-color: white;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   box-shadow: -1px 0 4px rgba(14, 55, 63, 0.15);
   font-weight: normal;
 }
