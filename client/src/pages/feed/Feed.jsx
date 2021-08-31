@@ -15,9 +15,9 @@ const Feed = ({feed, accessToken, isLogin}) => {
 
   const vote =(el) => {
 
-    if(!isLogin){
-      alert('로그인 해주세요:)')
-    }
+    // if(!isLogin){
+    //   alert('로그인 해주세요:)')
+    // }
     //진짜로 투표하시겠습니까?에 '네'로 답했기 때문에 
 
     //투표한 사람인지 아닌지 확인하는 axios 요청.

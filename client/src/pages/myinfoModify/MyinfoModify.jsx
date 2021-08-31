@@ -4,8 +4,8 @@ import axios from "axios";
 import { useHistory } from "react-router";
 import RealVote from "../../components/modals/RealVote";
 import NullPage from "../../components/NullPage/Nullpage";
-
-axios.defaults.withCredentials = true;
+import { createBrowserHistory } from "history";
+// axios.defaults.withCredentials = true;
 const MyinfoModify = ({
   info,
   setInfo,
@@ -27,9 +27,8 @@ const MyinfoModify = ({
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
-
+  //console.log(info.id, "ddddddd");
   const doneModify = () => {
-    //수정하기=> 모달띄우기
     setModifyYes(true);
   };
 
@@ -42,7 +41,7 @@ const MyinfoModify = ({
         { userName: info.nickname, mobile: info.mobile },
         {
           params: {
-            id: info.userid,
+            id: info.id,
           },
           headers: {
             authorization: accessToken,
@@ -51,19 +50,15 @@ const MyinfoModify = ({
         }
       )
       .then((result) => {
-        console.log(result);
-        // if (result.data.message === "ok") {
-        //   setModifyYes(false);
-        //   history.push("/");
-        // }
+        //console.log(result.data.message === "profile changed");
+        if (result.data.message === "profile changed") {
+          setModifyYes(false);
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        throw err;
       });
-
-    setInfo({
-      ...info,
-      password: "",
-      password2: "",
-    });
-    history.push("/");
   };
   const realno = () => {
     setModifyYes(false);
@@ -71,7 +66,7 @@ const MyinfoModify = ({
   };
   const noModify = () => {
     //취소하기버튼
-    history.push("/mypage");
+    history.push("/");
   };
   return (
     <>
@@ -122,9 +117,9 @@ const MyinfoModify = ({
                       type="text"
                       ref={idRef}
                       className={styles.input}
-                      value="{info.userid}"
+                      value={info.userid}
                       name="userid"
-                      onChange={onChange}
+                      // onChange={onChange}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -134,7 +129,7 @@ const MyinfoModify = ({
                       type="text"
                       ref={nicknameRef}
                       className={styles.input}
-                      value="{info.nickname}"
+                      value={info.nickname}
                       name="nickname"
                       onChange={onChange}
                       autoComplete="off"
@@ -146,7 +141,7 @@ const MyinfoModify = ({
                       type="text"
                       ref={mobileRef}
                       className={styles.input}
-                      value="{info.mobile}"
+                      value={info.mobile}
                       name="mobile"
                       onChange={onChange}
                       autoComplete="off"
@@ -158,9 +153,10 @@ const MyinfoModify = ({
                       type="text"
                       ref={passwordRef}
                       className={styles.input}
-                      value="{info.password}"
+                      value=""
+                      // value={info.password}
                       name="password"
-                      onChange={onChange}
+                      // onChange={onChange}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -170,9 +166,10 @@ const MyinfoModify = ({
                       type="text"
                       ref={password2Ref}
                       className={styles.input}
-                      value="{info.password2}"
+                      value=""
+                      // value={info.password2}
                       name="password2"
-                      onChange={onChange}
+                      // onChange={onChange}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -198,5 +195,5 @@ const MyinfoModify = ({
 };
 
 export default MyinfoModify;
-
+export const browserHistory = createBrowserHistory();
 //뒤로가기  버튼 막기

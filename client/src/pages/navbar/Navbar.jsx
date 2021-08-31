@@ -9,7 +9,7 @@ const Navbar = ({
   onSignout,
   isLogin,
   info,
-  filterHandle,
+  setListRender,
   isAuthenticated,
   setInfo,
   accessToken,
@@ -27,35 +27,36 @@ const Navbar = ({
 
   const reset = () => {
     // 로고 홈버튼 클릭하면 해시태그 선택 안 되고 전체로 reset
-    filterHandle();
+    setListRender();
   };
 
   const clickmypage = () => {
-    axios
-      .get(
-        "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/:id",
-        {
-          params: {
-            // id: info.userid,
-          },
-          headers: {
-            authorization: accessToken,
-          },
-          "Content-Type": "application/json",
-        }
-      )
-      .then((result) => {
-        console.log(result);
-        // setInfo({
-        //   //인포상태 변화 //받아온 데이터로 넣어주기
-        //   userid: "abc1234",
-        //   nickname: "춘식",
-        //   mobile: "010-0000-0000",
-        //   password: "",
-        //   password2: "",
-        // });
-      });
+    // axios
+    //   .get(
+    //     "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/:id",
+    //     {
+    //       params: {
+    //         // id: info.userid,
+    //       },
+    //       headers: {
+    //         authorization: accessToken,
+    //       },
+    //       "Content-Type": "application/json",
+    //     }
+    //   )
+    //   .then((result) => {
+    //     console.log(result);
+    //     // setInfo({
+    //     //   //인포상태 변화 //받아온 데이터로 넣어주기
+    //     //   userid: "abc1234",
+    //     //   nickname: "춘식",
+    //     //   mobile: "010-0000-0000",
+    //     //   password: "",
+    //     //   password2: "",
+    //     // });
+    //   });
     history.push("/mypage");
+    //isAuthenticated(accessToken);
   };
 
   return (

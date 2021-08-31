@@ -20,7 +20,8 @@ module.exports = {
     if (!authorization) {
       return null;
     }
-    const token = authorization; /*.split(";")[0].split("=")[1]; //토큰 들어오는 것 보고 수정*/
+    const token =
+      authorization; /*.split(";")[0].split("=")[1]; //토큰 들어오는 것 보고 수정*/
 
     try {
       return verify(token, process.env.ACCESS_SECRET);

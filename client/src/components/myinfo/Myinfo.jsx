@@ -12,6 +12,7 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
     //setIsModifyClicked(true);
     history.push("/modifyinfo");
   };
+  //console.log(info, "마이인포");
 
   return (
     <>
@@ -32,7 +33,7 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
                   아이디:
                   <input
                     className={styles.input}
-                    value="{info.userid}"
+                    value={info.userid}
                     readOnly
                   ></input>
                 </span>
@@ -40,7 +41,7 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
                   닉네임:
                   <input
                     className={styles.input}
-                    value="{info.nickname}"
+                    value={info.nickname}
                     readOnly
                   ></input>
                 </span>
@@ -48,7 +49,7 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
                   모바일:
                   <input
                     className={styles.input}
-                    value="{info.mobile}"
+                    value={info.mobile}
                     readOnly
                   ></input>
                 </span>

@@ -5,7 +5,7 @@ const { isAuthorized } = require("./tokenFunction");
 module.exports = {
   updateMyPost: (req, res) => {
     const accessTokendata = isAuthorized(req);
-    const post_id = req.params.id;
+    const post_id = req.params.postid;
     const { title, contents, img_1, img_2, hashTags } = req.body;
 
     if (!accessTokendata) {

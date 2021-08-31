@@ -1,43 +1,29 @@
 import styles from "./App.module.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./pages/navbar/Navbar";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-  Redirect
-} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, useHistory} from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Footer from "./pages/footer/Footer";
 import MainFeeds from "./pages/mainFeeds/MainFeeds";
 import Mypage from "./pages/mypage/Mypage";
 import Writing from "./pages/writing/Writing";
-import Login from "./components/signin/Signin";
-import Signup from "./components/signup/Signup";
 import Feed from "./pages/feed/Feed";
-import Signin from "./components/signin/Signin";
-import VoteResult from "./components/voteResult/VoteResult";
 import ScrollButton from "./components/scrollButton/ScrollButton";
 import axios from "axios";
-
 import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 
-import LoadingIndicator from "./components/LoadingIndicator";
-import FeedResult from "./pages/feedResult/FeedResult";
+
 
 function App() {
-
   const history = useHistory();
   //로그인상태
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-  //console.log(accessToken, "--------------");
-  //로그인인증 & 유저데이터 Get으로 불러오기(mypage) 정보 잘 받아왔으면 인포에 정보를 넣어준다.
+
   const isAuthenticated = (accessToken) => {
-    console.log(accessToken, "d");
+    setAccessToken(accessToken);
     axios
       .get(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/auth",
@@ -49,27 +35,25 @@ function App() {
         }
       )
       .then((result) => {
-        console.log(result);
-        //user정보 받아서 setInfo해주기
-        // setInfo({
-        //   //인포상태 변화 //받아온 데이터로 넣어주기
-        //   userid: "abc1234",
-        //   nickname: "춘식",
-        //   mobile: "010-0000-0000",
-        //   password: "",
-        //   password2: "",
-        // });
+        const { id, user_id, nickname, password, phone_number, sign_up_type } =
+          result.data.data.userInfo;
+        setInfo({
+          id: id,
+          userid: user_id,
+          nickname: nickname,
+          mobile: phone_number,
+          password: password,
+          password2: "",
+        });
+        browserHistory.push("/");
       });
   };
-  //console.log(isLogin);
-  //로그인 성공시 리스폰스
 
   const handleResponseSuccess = (data) => {
     const { accessToken, message } = data;
-    setAccessToken(accessToken); //액세스토큰 넣기
+    setAccessToken(accessToken);
     loginHandler(); //로그인 true
     isAuthenticated(accessToken);
-    console.log(accessToken, "dd");
   };
 
   /**********************페이지 컨트롤 부분***************************/
@@ -77,33 +61,8 @@ function App() {
   const [feeds, setFeeds] = useState([]); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
-  const [isFiltered, setIsFiltered] = useState(false); //해시태그 클릭.
+  const [listRender, setListRender] = useState(false);
   
-
-  const select = (el) => {//썸네일 클릭 시
-    setSelectedFeed(el);
-  };
-
-  const listFilter = (tag) => {
-    // 필터기능 구현 수정 필요... 서버에 요청 보내야 할 듯
-    // feeds에서 전체 리스트 GET받고(필터링을 서버에서 하는 게 아님),
-    // 아래 조건문에 따라 필터링 시키기.
-    // if(tag === '전체'){
-    //   //setFeeds(feeds);
-    // }else{
-    //   setFeeds(feeds.filter(el => el.tags.includes(tag)));
-    // }
-  };
-
-  const revise = (el) => {
-    //update할 포스트 정보 상태에 끼워넣고 /update페이지로 보내주기.
-    setRevised(el);
-  };
-
-  // const createFeeds = (el) => {
-  //   setFeeds([el, ...feeds]); //최신 피드니까 상단에 뜨게끔 0번째 인덱스로 추가됨.
-  // };
-
   useEffect(() => {
     axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
     .then(res => {
@@ -116,22 +75,50 @@ function App() {
           tags: JSON.parse(el.tags)
         }
       }))
-      //console.log(res.data.data[0].imgInfo2)
-  })},[])
+  })}, [listRender]) //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
 
+  const select = (el) => {//썸네일 클릭 시
+    setSelectedFeed(el);
+  };
 
+  const listFilter = (tag) => {
+    
+    if(tag==='전체'){
+       axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
+      .then(res => {
+        let result = res.data.data.sort((a,b)=>{
+              return new Date(b.created_at) - new Date(a.created_at);
+        });
+  
+        setFeeds(result.map(el => {
+          return {
+            ...el, 
+            tags: JSON.parse(el.tags)
+          }
+        }))
+      })
+    } else{
+      axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
+      .then(res => {
+        let result = res.data.data.sort((a,b)=>{
+              return new Date(b.created_at) - new Date(a.created_at);
+        }); //최신순으로 정렬
+        result = result.map(el => {
+          return {
+            ...el, 
+            tags: JSON.parse(el.tags)
+          }
+        }) //배열 파싱하고...
+        result = result.filter(el => el.tags.includes(tag))
+        setFeeds(result);
+      })
+    }
+  };
 
-
-  // axios.get('http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post')
-  // .then(res => {
-  //   const result = res.data.data;
-  //   result.sort((a,b)=>{
-  //     return new Date(b.created_at) - new Date(a.created_at);
-  //   });
-  //   setFeeds(result);
-  // })
-  //   console.log('hi')
-  // }, [])
+  const revise = (el) => {
+    //update할 포스트 정보 상태에 끼워넣고 /update페이지로 보내주기.
+    setRevised(el);
+  };
 
   /**********************sign in 컨트롤 부분***************************/
 
@@ -151,7 +138,7 @@ function App() {
         setInfo(null);
         setAccessToken(result.data.accessToken);
         browserHistory.push("/");
-        // history.push("/");
+
         //첫화면으로 랜더시키기 !
       });
     setIsLogin(false);
@@ -161,11 +148,9 @@ function App() {
 
   useEffect(() => {
     const storageToken = localStorage.getItem("accessToken");
-    // console.log(JSON.parse(storageToken), "요게 똑바로 나오면됨");
-    // const storageToken = JSON.parse(localStorage.getItem("accessToken"));
     if (storageToken) {
       loginHandler();
-      //setAccessToken({ accessToken: JSON.parse(storageToken) });
+      isAuthenticated(JSON.parse(storageToken));
     }
   }, [accessToken]);
 
@@ -177,7 +162,7 @@ function App() {
       <body className={styles.body}>
         <Router>
           <Navbar
-            filterHandle={listFilter}
+            setListRender={()=> setListRender(!listRender)}
             handleResponseSuccess={handleResponseSuccess}
             onSignout={onSignout}
             isLogin={isLogin}
@@ -215,14 +200,21 @@ function App() {
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
               </Route>
               <Route path="/writing">
-                <Writing accessToken={accessToken} isLogin={isLogin} />
+                <Writing accessToken={accessToken} 
+                isLogin={isLogin} 
+                setListRender={()=> setListRender(!listRender)}/>
               </Route>
               <Route path="/update">
-                <Update feed={revised} />
+                <Update feed={revised} 
+                accessToken={accessToken} />
               </Route>
               {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
                 <Route path="/feed">
-                  <Feed feed={selectedFeed} accessToken={accessToken} isLogin={isLogin}/>
+                  <Feed
+                    feed={selectedFeed}
+                    accessToken={accessToken}
+                    isLogin={isLogin}
+                  />
                 </Route>
               ) : null}
               {/* <Route path="/feedresult">
@@ -244,7 +236,7 @@ export default App;
 export const browserHistory = createBrowserHistory();
 
 // const dummyData = [
-//   { 
+//   {
 //     id: 1,
 //     userName: "구름이",
 //     title: "회사에 입고 다닐 데일리 니트 색깔 골라주세요🙏",

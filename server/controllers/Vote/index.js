@@ -1,12 +1,16 @@
 const { voter: voterModel, post: postModel } = require("../../models");
+const voter = require("../../models/voter");
+const { isAuthorized } = require("../tokenFunction");
 module.exports = {
   isVote: async (req, res) => {
-    const { postId, userId } = req.query;
-
+    //헤더값이 들어온다.
+    const userInfo = isAuthorized(req);
+    const { postId } = req.query;
+    const user_id = userInfo.id;
     const result = await voterModel.findOne({
       where: {
         voting_id: postId,
-        user_id: userId,
+        user_id,
       },
     });
 
@@ -19,6 +23,78 @@ module.exports = {
     }
   },
   vote: async (req, res) => {
-    const { postId, userId, option } = req.body;
+    const userInfo = isAuthorized(req);
+    const { postId: voting_id, option: options_check } = req.body;
+
+    const user_id = userInfo.id;
+    await voterModel.create({
+      voting_id,
+      user_id,
+      options_check,
+    });
+
+    if (options_check === 1) {
+      const result = await postModel.findOne({
+        attributes: ["option1_count"],
+        where: {
+          id: voting_id,
+        },
+      });
+
+      const { option1_count: count } = result.dataValues;
+
+      console.log(count);
+      const doUpdate = await postModel.update(
+        { option1_count: count + 1 },
+        {
+          where: {
+            id: voting_id,
+          },
+        }
+      );
+      if (!!doUpdate) res.status(201).json({ message: "ok" });
+      if (!doUpdate) res.status(201).json({ message: "failed to vote" });
+    } else if (options_check === 2) {
+      const result = await postModel.findOne({
+        attributes: ["option2_count"],
+        where: {
+          id: voting_id,
+        },
+      });
+
+      const { option2_count: count } = result.dataValues;
+
+      console.log(count);
+      const doUpdate = await postModel.update(
+        { option2_count: count + 1 },
+        {
+          where: {
+            id: voting_id,
+          },
+        }
+      );
+      if (!!doUpdate) res.status(201).json({ message: "ok" });
+      if (!doUpdate) res.status(201).json({ message: "failed to vote" });
+    }
+  },
+  voteResult: async (req, res) => {
+    const { postId } = req.body;
+
+    const result = await postModel.findOne({
+      attributes: ["option1_count", "option2_count"],
+      where: {
+        id: postId,
+      },
+    });
+
+    const { option1_count, option2_count } = result.dataValues;
+
+    res.status(200).json({
+      data: {
+        option1_count,
+        option2_count,
+      },
+      message: "ok",
+    });
   },
 };
