@@ -30,6 +30,12 @@ const Signin = ({
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   /**********************sign in 컨트롤 부분***************************/
 
   //로그인버튼 클릭시 호출 메소드
@@ -104,7 +110,11 @@ const Signin = ({
             ) : null}
 
             <li className={styles.item}>
-              <button className={styles.button} onClick={handleLogin}>
+              <button
+                className={styles.button}
+                onClick={handleLogin}
+                onKeyPress={onKeyPress}
+              >
                 Sign in
               </button>
             </li>

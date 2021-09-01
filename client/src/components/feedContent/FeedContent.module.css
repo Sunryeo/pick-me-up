@@ -20,6 +20,7 @@
   margin-bottom: 0.2rem;
   margin-left: 0.3rem;
   font-weight: bold;
+  color: black;
 }
 
 .categories {
@@ -37,8 +38,10 @@
 }
 
 .voteText {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   margin-left: 0.5rem;
+  color: rgba(201, 83, 105, 0.959);
+  font-weight: bold;
 }
 
 @media screen and (max-width: 33rem) {

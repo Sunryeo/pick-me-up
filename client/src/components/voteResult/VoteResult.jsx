@@ -7,12 +7,10 @@ const VoteResult = ({feed, isVoted,setIsVoted}) => {
 
   const voteDate = {
     per1 : {
-      percent:30,
-      option_1:"살구"
+      percent: Math.round((feed.option1_count/(feed.option1_count+feed.option2_count))*100)
     },
     per2 : {
-      percent:70,
-      option_1:"네이비"
+      percent: Math.round((feed.option2_count/(feed.option1_count+feed.option2_count))*100)
     }
   }
 
@@ -22,7 +20,7 @@ const VoteResult = ({feed, isVoted,setIsVoted}) => {
 
   return  (
     <>
-    {isVoted ? //모달창 닫고 
+    {isVoted ? //다시 피드로 돌아감. 
       <Feed feed={feed}/>
       :
     (

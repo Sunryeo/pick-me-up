@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import RealVote from "../../components/modals/RealVote";
 import NullPage from "../../components/NullPage/Nullpage";
 import { createBrowserHistory } from "history";
+import { Link } from "react-router-dom";
 // axios.defaults.withCredentials = true;
 const MyinfoModify = ({
   info,
@@ -12,33 +13,42 @@ const MyinfoModify = ({
   accessToken,
   isLogin = { isLogin },
 }) => {
-  const history = useHistory();
-  const idRef = useRef();
-  const nicknameRef = useRef();
-  const mobileRef = useRef();
-  const passwordRef = useRef();
-  const password2Ref = useRef();
-
+  const [userid, setUserId] = useState(info.userid);
+  const [nickname, setNickName] = useState(info.nickname);
+  const [mobilenum, setMobileNum] = useState(info.mobile);
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [modifyYes, setModifyYes] = useState(false);
 
-  const onChange = (event) => {
-    setInfo({
-      ...info,
-      [event.currentTarget.name]: event.currentTarget.value,
-    });
+  const history = useHistory();
+  const handleId = (event) => {
+    setUserId(event.target.value);
   };
+  const handleNickname = (event) => {
+    setNickName(event.target.value);
+  };
+  const handleMobile = (event) => {
+    setMobileNum(event.target.value);
+  };
+
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  };
+  const handlePassword2 = (event) => {
+    setPassword2(event.target.value);
+  };
+
   //console.log(info.id, "ddddddd");
   const doneModify = () => {
     setModifyYes(true);
   };
 
   const realModify = () => {
-    //모달에서 네!
-    //axios.post 프로필수정.=> ok시
+    console.log(nickname, "---------------");
     axios
       .post(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/user/profile/:id",
-        { userName: info.nickname, mobile: info.mobile },
+        { userName: nickname, mobile: mobilenum },
         {
           params: {
             id: info.id,
@@ -51,6 +61,7 @@ const MyinfoModify = ({
       )
       .then((result) => {
         //console.log(result.data.message === "profile changed");
+        console.log(result.data);
         if (result.data.message === "profile changed") {
           setModifyYes(false);
           history.push("/");
@@ -62,12 +73,9 @@ const MyinfoModify = ({
   };
   const realno = () => {
     setModifyYes(false);
-    history.push("/mypage");
-  };
-  const noModify = () => {
-    //취소하기버튼
     history.push("/");
   };
+
   return (
     <>
       {isLogin ? (
@@ -86,11 +94,7 @@ const MyinfoModify = ({
                 </span>
               </div>
             </section>
-          ) : // <div className={styles.modalcontainer}>
-          //   진짜 진짜 수정할꼬얌 ?<button onClick={realModify}>네</button>
-          //   <button onClick={realno}>아니오</button>
-          // </div>
-          null}
+          ) : null}
           <div className={styles.contain}>
             <div className={styles.infobox}>
               <div className={styles.imgbox}>
@@ -100,9 +104,9 @@ const MyinfoModify = ({
                     className={styles.faceimg}
                   ></img>
                 </span>
-                <label for="profileEdit" className={styles.editbox}>
+                {/* <label for="profileEdit" className={styles.editbox}>
                   프로필사진 수정
-                </label>
+                </label> */}
                 {/* <input
                 type="file"
                 id="profileEdit"
@@ -115,11 +119,11 @@ const MyinfoModify = ({
                     아이디:
                     <input
                       type="text"
-                      ref={idRef}
+                      // ref={idRef}
                       className={styles.input}
-                      value={info.userid}
+                      value={userid}
                       name="userid"
-                      // onChange={onChange}
+                      onChange={handleId}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -127,11 +131,11 @@ const MyinfoModify = ({
                     닉네임:
                     <input
                       type="text"
-                      ref={nicknameRef}
+                      // ref={nicknameRef}
                       className={styles.input}
-                      value={info.nickname}
+                      value={nickname}
                       name="nickname"
-                      onChange={onChange}
+                      onChange={handleNickname}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -139,11 +143,11 @@ const MyinfoModify = ({
                     모바일:
                     <input
                       type="text"
-                      ref={mobileRef}
+                      // ref={mobileRef}
                       className={styles.input}
-                      value={info.mobile}
+                      value={mobilenum}
                       name="mobile"
-                      onChange={onChange}
+                      onChange={handleMobile}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -151,12 +155,11 @@ const MyinfoModify = ({
                     비밀번호:
                     <input
                       type="text"
-                      ref={passwordRef}
+                      // ref={passwordRef}
                       className={styles.input}
-                      value=""
-                      // value={info.password}
+                      value={password}
                       name="password"
-                      // onChange={onChange}
+                      onChange={handlePassword}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -164,12 +167,11 @@ const MyinfoModify = ({
                     비밀번호확인:
                     <input
                       type="text"
-                      ref={password2Ref}
+                      // ref={password2Ref}
                       className={styles.input}
-                      value=""
-                      // value={info.password2}
+                      value={password2}
                       name="password2"
-                      // onChange={onChange}
+                      onChange={handlePassword2}
                       autoComplete="off"
                     ></input>
                   </span>
@@ -178,9 +180,10 @@ const MyinfoModify = ({
             </div>
 
             <div className={styles.btns}>
-              <button className={styles.btn} onClick={noModify}>
-                취소?
-              </button>
+              <Link to="/">
+                <button className={styles.btn}>취소</button>
+              </Link>
+
               <button className={styles.btn} onClick={doneModify}>
                 수정완료
               </button>

@@ -16,7 +16,7 @@ module.exports = {
       .json({ message: "ok" });
   },
   isAuthorized: (req) => {
-    const authorization = req.headers.authorization; /**["cookie"];*/
+    const authorization = req.headers.authorization; /*["cookie"];*/
     if (!authorization) {
       return null;
     }

@@ -4,6 +4,7 @@ import MyinfoModify from "../../pages/myinfoModify/MyinfoModify";
 import NullPage from "../NullPage/Nullpage";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Myinfo = ({ info, accessToken, isLogin }) => {
   const history = useHistory();
@@ -12,7 +13,11 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
     //setIsModifyClicked(true);
     history.push("/modifyinfo");
   };
-  //console.log(info, "마이인포");
+
+  const clickDeleteUser = () => {
+    //회원탈퇴 요청하기
+    //axios.post("")
+  };
 
   return (
     <>
@@ -29,14 +34,14 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
             </div>
             <div className={styles.textbox}>
               <div className={styles.ulbox}>
-                <span className={styles.list}>
+                {/* <span className={styles.list}>
                   아이디:
                   <input
                     className={styles.input}
                     value={info.userid}
                     readOnly
                   ></input>
-                </span>
+                </span> */}
                 <span className={styles.list}>
                   닉네임:
                   <input
@@ -58,8 +63,9 @@ const Myinfo = ({ info, accessToken, isLogin }) => {
           </div>
 
           <div className={styles.btns}>
-            <button className={styles.btn}>회원탈퇴(optional)</button>
-
+            <button className={styles.out} onClick={clickDeleteUser}>
+              회원탈퇴
+            </button>
             <button className={styles.btn} onClick={handleClickModify}>
               수정하기
             </button>
