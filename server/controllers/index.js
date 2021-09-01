@@ -5,7 +5,7 @@ const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
 const jwt = require("jsonwebtoken");
 const { generateAccessToken } = require("./tokenFunction");
-const { changeProfile } = require("../controllers/ProfileChange");
+
 const { getMyInfo } = require("./GetMyInfo");
 const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
@@ -16,9 +16,6 @@ const { isVote, vote, voteResult } = require("./Vote");
 const { getToken, getUserInfo } = require("../controllers/GoogleOAuth");
 
 //아이디 닉네임 모바일 비밀번호
-
-router.patch("/user/profile/:id", changeProfile);
-//router.get("/user/posting-list/:id", getMyPost);
 
 router.post("/sign-up", (req, res) => {
   const { userId, password, userName, mobile, signUpType } = req.body;
@@ -96,7 +93,11 @@ router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
 
-router.post("/user/profile/:id", changeProfile);
+router.post(
+  "/user/profile/:id",
+
+  changeProfile
+);
 
 router.post("/posting", sendPost);
 router.get("/get-all-post", getAllPost);

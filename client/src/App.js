@@ -59,7 +59,7 @@ function App() {
       loginHandler();
       isAuthenticated(JSON.parse(storageToken));
     }
-  }, [accessToken, info]);
+  }, [accessToken]);
 
   const handleResponseSuccess = (data) => {
     const { accessToken, message } = data;
@@ -340,6 +340,7 @@ function App() {
                 <MyinfoModify
                   info={info}
                   setInfo={setInfo}
+                  setAccessToken={setAccessToken}
                   accessToken={accessToken}
                   isLogin={isLogin}
                 />
