@@ -64,7 +64,6 @@ module.exports = {
 
       const { option2_count: count } = result.dataValues;
 
-      console.log(count);
       const doUpdate = await postModel.update(
         { option2_count: count + 1 },
         {

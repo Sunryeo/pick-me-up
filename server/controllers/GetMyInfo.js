@@ -22,6 +22,7 @@ module.exports = {
               .json({ data: null, message: "user not exist" });
           } else {
             console.log("data:", data);
+            delete data.dataValues.password;
             return res
               .status(200)
               .json({ data: data.dataValues, message: "ok" });

@@ -1,5 +1,4 @@
 const { post } = require("../models");
-// const { users } = require("../models");
 const { isAuthorized } = require("./tokenFunction");
 
 module.exports = {
@@ -22,6 +21,7 @@ module.exports = {
             imgInfo1: img_1,
             imgInfo2: img_2,
             tags: hashTags,
+            updated_at: new Date(),
           },
           {
             where: {

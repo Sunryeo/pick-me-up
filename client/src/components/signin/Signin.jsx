@@ -3,7 +3,7 @@ import Signup from "../signup/Signup";
 import styles from "./Signin.module.css";
 import axios from "axios";
 import { useHistory } from "react-router";
-
+import GoogleLogin from "./GoogleLogin";
 // axios.defaults.withCredentials = true;
 
 const Signin = ({
@@ -120,7 +120,9 @@ const Signin = ({
             </li>
 
             <li className={styles.item}>
-              <button className={styles.button}>Google</button>
+              <button className={styles.button}>
+                <GoogleLogin />
+              </button>
             </li>
             <li className={styles.item}>
               <button className={styles.signup} onClick={clickSignUpBtn}>

@@ -1,5 +1,5 @@
 import styles from "./Signup.module.css";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router";
 
@@ -19,43 +19,62 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
   //에러메세지 상태
   const [errorMessage, setErrorMessage] = useState("");
   const { userId, userName, mobile, password, password2 } = userinfo;
+
+  const checkValue = (asValue) => {
+    var regExp = /^[a-zA-z0-9]{4,12}$/;
+    return regExp.test(asValue);
+  };
+
   const handleSignup = () => {
     if (!userId || !userName || !mobile || !password || !password2) {
       setErrorMessage("모든 항목을 입력해주세요");
-    } else {
-      setErrorMessage("");
-      const userData = {
-        userId: userId,
-        password: password,
-        userName: userName,
-        mobile: mobile,
-        // signUpType:signUpType,
-      };
-      // http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/
-      axios
-        .post(
-          "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
-          userData,
-          {
-            "Content-Type": "application/json",
-            // withCredentials: true,
-          }
-        )
-        .then((result) => {
-          // console.log(result.data);
-          if (result.data.message === "ok") {
-            clickCloseAll();
-            //회원가입완료 모달 띄우면 좋을것 같음
-            history.push("/");
-          }
-        })
-        .catch((err) => {
-          //임시로 해뒀어요 요부분 나중에 고칠게요.. ㅠㅜ
-          setErrorMessage("사용중인 아이디입니다.");
-        });
+      return false;
     }
+    if (password !== password2) {
+      setErrorMessage("두 비밀번호가 같지 않습니다.");
+      return false;
+    }
+    if (!checkValue(password)) {
+      setErrorMessage("비밀번호는 4글자 이상 영문이어야합니다.");
+      return false;
+    }
+    if (!checkValue(userId)) {
+      setErrorMessage("아이디는 4글자 이상 영문이어야합니다.");
+      return false;
+    }
+    signupreq();
   };
 
+  const signupreq = () => {
+    const userData = {
+      userId: userId,
+      password: password,
+      userName: userName,
+      mobile: mobile,
+      // signUpType:signUpType,
+    };
+    // http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/
+    axios
+      .post(
+        "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/sign-up",
+        userData,
+        {
+          "Content-Type": "application/json",
+          // withCredentials: true,
+        }
+      )
+      .then((result) => {
+        // console.log(result.data);
+        if (result.data.message === "ok") {
+          clickCloseAll();
+
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        setErrorMessage("사용중인 아이디입니다.");
+      });
+  };
   //인풋창 연결 메소드
   const handleInputValue = (key) => (e) => {
     setUserinfo({
@@ -77,7 +96,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
             <img src="../../../images/close.svg" className={styles.img}></img>
           </span>
         </div>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()} id="aa">
           <ul className={styles.list}>
             <li className={styles.item}>
               <input
