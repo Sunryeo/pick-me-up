@@ -3,9 +3,8 @@ const { Router } = require("express");
 const router = Router();
 const { users } = require("../models");
 const { getMyPost } = require("../controllers/GetMyPost");
-const jwt = require("jsonwebtoken");
 const { generateAccessToken } = require("./tokenFunction");
-
+const { changeProfile } = require("./ProfileChange");
 const { getMyInfo } = require("./GetMyInfo");
 const { auth } = require("../controllers/auth");
 const { updateMyPost } = require("./UpdateMyPost");
@@ -72,18 +71,10 @@ router.post("/sign-in", async (req, res) => {
 
   const accessToken = generateAccessToken(userInfo);
 
-  return (
-    res
-      .status(200)
-      // .cookie("jwt", accessToken, {
-      //   httpOnly: true,
-      //   sameSite: "lax",
-      // })
-      .json({
-        accessToken,
-        message: "ok",
-      })
-  );
+  return res.status(200).json({
+    accessToken,
+    message: "ok",
+  });
 });
 
 router.post("/receive/token", getToken);
@@ -93,11 +84,7 @@ router.post("/sign-out", (req, res) => {
   res.status(205).json({ message: "successfully signed out!" });
 });
 
-router.post(
-  "/user/profile/:id",
-
-  changeProfile
-);
+router.post("/user/profile/:id", changeProfile);
 
 router.post("/posting", sendPost);
 router.get("/get-all-post", getAllPost);
