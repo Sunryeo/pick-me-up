@@ -1,17 +1,18 @@
-/* .outCategory {
-  overflow-x: hidden;
+/* .outCategory{
+  position: relative;
 } */
 .categories {
   height: 3.5rem;
   display: flex;
   align-items: center;
   margin-top: 1rem;
-  margin-left: 0.5rem;
-  /* position: sticky;
+  padding-left: 0.5rem;
+  position: sticky;
   background-color: white;
-  top: 90px; */
-  width: 500px;
+  top: 75px;
+  width: 100%;
   overflow: hidden;
+  /* z-index: 1000; */
 }
 
 .hashtag {
@@ -21,6 +22,7 @@
   padding: 0.4rem 0.7rem;
   font-size: 0.7rem;
   margin-right: 0.3rem;
+  white-space: nowrap;
 }
 
 .hashtagClicked {
@@ -32,11 +34,12 @@
   border: 1px solid rgb(48, 48, 48);
   background-color: rgb(48, 48, 48);
   border-radius: 20px;
+  white-space: nowrap;
 }
 
 .writingBtn {
   text-align: right;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .button {

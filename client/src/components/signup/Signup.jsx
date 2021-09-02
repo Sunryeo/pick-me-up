@@ -103,7 +103,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
                 type="text"
                 onChange={handleInputValue("userId")}
                 className={styles.text}
-                placeholder="아이디를 입력하세요"
+                placeholder="아이디는 4글자 이상의 영문"
               />
             </li>
             <li className={styles.item}>
@@ -127,7 +127,7 @@ const Signup = ({ setIsSignUpClicked, clickCloseBtn }) => {
                 type="password"
                 onChange={handleInputValue("password")}
                 className={styles.text}
-                placeholder="비밀번호를 입력하세요"
+                placeholder="비밀번호는 4글자 이상의 영문"
               />
             </li>
             <li className={styles.item}>

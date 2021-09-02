@@ -6,18 +6,22 @@ const Footer = (props) => {
   <footer>
     <div className={styles.container}>
       <div className={styles.contentbox}>
-        <div className={styles.title}>
-          TEAM MEMBER
+      <div className={styles.info}>
+        <div className={styles.name}>Pick me up 아직 작업중!!! 
+          <li><a>Pickmeup Wiki</a></li>
         </div>
-
-        <ul className={styles.info}>
-          <li className={styles.name}>
-              <span>문순려 [back-end] </span>
-              <span>이동욱 [back-end] </span>
-              <span>유다희 [front-end] </span>
-              <span>박지영 [front-end] </span>
-          </li>
-        </ul>
+        <div>
+          <ul className={styles.name}>Team PickMe
+            <li>문순려</li>
+            <li>박지영</li>
+            <li>유다희</li>
+            <li>이동욱</li>
+            <li><a>Repo & Wiki</a></li>
+          </ul>
+        </div>
+        <div className={styles.rights}>Copyright &#169; 2021 Team PickMe All rights reserved</div>
+      </div>
+        
       </div>
     </div>
    

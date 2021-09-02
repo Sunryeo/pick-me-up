@@ -12,6 +12,7 @@ const MyinfoModify = ({
   setInfo,
   accessToken,
   setAccessToken,
+  isAuthenticated,
   isLogin = { isLogin },
 }) => {
   const [userid, setUserId] = useState(info.userid);
@@ -39,7 +40,6 @@ const MyinfoModify = ({
     setPassword2(event.target.value);
   };
 
-  //console.log(info.id, "ddddddd");
   const doneModify = () => {
     setModifyYes(true);
   };
@@ -64,6 +64,7 @@ const MyinfoModify = ({
           setModifyYes(false);
           setAccessToken(result.data.data);
           history.push("/");
+          isAuthenticated(result.data.data);  //얘 수정중암 @@
         }
       })
       .catch((err) => {

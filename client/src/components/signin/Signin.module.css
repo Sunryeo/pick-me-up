@@ -2,20 +2,20 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
-span{
+span {
   display: block;
 }
 
-.backdrop{
-    position: fixed; 
-    z-index: 10;
-    top:0; 
-    left: 0; 
-    right: 0; 
-    bottom:0;
-    background-color: rgba(0,0,0,0.5);
-    display: grid;
-    place-items: center;
+.backdrop {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
 }
 
 .signin {
@@ -25,43 +25,41 @@ span{
   flex-direction: column;
   justify-content: center;
   background-color: white;
-  border:2px solid grey;
-  z-index: 2;
+  border: 2px solid grey;
+  z-index: 5;
 }
 
-.titlebox{
+.titlebox {
   background-color: #fbc000;
   height: 4rem;
   color: black;
   position: relative;
 }
-.title{
+.title {
   position: absolute;
   width: 40%;
-  height:70%;
+  height: 70%;
   top: 18%;
   left: 30%;
   font-size: 1.8rem;
   font-family: "Fredoka One", cursive;
   font-weight: bold;
 }
-.close{
+.close {
   position: absolute;
   background-color: #fbc000;
-  width: 30px; 
-  height:30px;
+  width: 30px;
+  height: 30px;
   top: 0;
-  right:0;
-  color:black;  /*아이콘 들어갈예정*/
+  right: 0;
+  color: black; /*아이콘 들어갈예정*/
   cursor: pointer;
-
 }
 
-.img{
+.img {
   width: 100%;
   height: 100%;
 }
-
 
 .list {
   width: 100%;
@@ -78,12 +76,12 @@ span{
   align-items: center;
   padding: 3px 3px;
 }
-.text{
-  border:0; 
-  border-bottom:1px solid grey; 
+.text {
+  border: 0;
+  border-bottom: 1px solid grey;
   border-radius: 0.5rem;
   width: 100%;
-  height:  2.5em;
+  height: 2.5em;
   font-size: 1rem;
   text-indent: 1rem;
   outline: none;
@@ -102,25 +100,22 @@ span{
 }
 
 .button:hover {
-
   color: rgb(82, 78, 78);
 }
 
-
 /*존재하는 경우*/
-.label{
-  border:1px solid black;
+.label {
+  border: 1px solid black;
   display: block;
-  width: 50%; 
+  width: 50%;
   height: 15%;
-  border: 0 ;
+  border: 0;
   font-size: 13px;
   padding: 5px 5px;
   color: red;
 }
 
-
-.signup{
+.signup {
   width: 100%;
   height: 4em;
   font-size: 1.2rem;
@@ -132,13 +127,12 @@ span{
   font-family: "Fredoka One", cursive;
 }
 
-.signup:hover{
+.signup:hover {
   color: white;
   background-color: #fbc000;
 }
 
-
-.alert{
+.alert {
   color: red;
   position: relative;
   padding: 0.75rem 1.25rem;
@@ -147,11 +141,8 @@ span{
   border-radius: 0.25rem;
 }
 
-
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .signin {
-    width: 28em;
-    
+    width: 100%;
   }
-
 }

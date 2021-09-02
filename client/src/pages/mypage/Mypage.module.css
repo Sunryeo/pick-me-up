@@ -4,13 +4,15 @@
   margin: 0 auto;
 }
 .category {
-  margin-bottom: 3rem;
+  margin-top: 1rem;
   border-bottom: 1px solid #b8b6b3;
   height: 3rem;
   display: flex;
   flex-direction: row;
-  /* justify-content: space-evenly; */
   align-items: flex-end;
+  position: sticky;
+  top: 75px;
+  background: white;
 }
 
 .myinfo,
@@ -46,7 +48,7 @@
   color: grey;
 }
 
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .container {
     /*최상위 바디 컨테이너*/
     width: 100%;

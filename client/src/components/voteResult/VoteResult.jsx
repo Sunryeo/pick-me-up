@@ -3,19 +3,21 @@ import styles from './VoteResult.module.css';
 import Feed from '../../pages/feed/Feed';
 
 
-const VoteResult = ({feed, isVoted,setIsVoted}) => {
-
-  const voteDate = {
+const VoteResult = ({feed, isVoted,setIsVoted, setIsVoteReal, voteMsg, voteCount}) => {
+  
+  //voteCount가 들어오게 되면...
+  let voteDate = {
     per1 : {
-      percent: Math.round((feed.option1_count/(feed.option1_count+feed.option2_count))*100)
+      percent: Math.round((voteCount.option1_count/(voteCount.option1_count+voteCount.option2_count))*100)
     },
     per2 : {
-      percent: Math.round((feed.option2_count/(feed.option1_count+feed.option2_count))*100)
+      percent: Math.round((voteCount.option2_count/(voteCount.option1_count+voteCount.option2_count))*100)
     }
   }
 
   const clickBack = () => {
-    setIsVoted(true)
+    setIsVoted(false)
+    setIsVoteReal(false)
   }
 
   return  (
@@ -39,16 +41,17 @@ const VoteResult = ({feed, isVoted,setIsVoted}) => {
 
       <div className={styles.graph}>
         <span className={styles.imgbox}>
-          <label className={styles.percent} >{voteDate.per1.percent}%</label>
+          <label className={styles.percent1} >{voteDate.per1.percent}%</label>
           <label className={styles.img1} style={{width: `${voteDate.per1.percent}%`}}></label>
         </span>
-        <span className={styles.title}>{feed.option1}</span>
+        <span className={styles.title1}>{feed.option1}</span>
         <span className={styles.imgbox}>
-          <label className={styles.percent}>{voteDate.per2.percent}%</label>
+          <label className={styles.percent2}>{voteDate.per2.percent}%</label>
           <label className={styles.img2}   style={{width: `${voteDate.per2.percent}%`}}></label>
         </span>
-        <span className={styles.title}>{feed.option2}</span>
+        <span className={styles.title2}>{feed.option2}</span>
       </div>
+      {voteMsg? <div className={styles.voteMessage}>이미 투표를 완료하셨어요!</div> : null}
      
      
     </section>

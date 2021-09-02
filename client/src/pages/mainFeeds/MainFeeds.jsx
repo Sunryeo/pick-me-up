@@ -4,16 +4,18 @@ import styles from "./MainFeeds.module.css";
 import SubNavbar from "../../components/subNavbar/SubNavbar";
 import FeedContent from "../../components/feedContent/FeedContent";
 
-const MainFeeds = ({ feeds, filterHandle, handleClick }) => {
+const MainFeeds = ({ feeds, filterHandle, handleClick, listRender}) => {
   //로딩스피너 시험 =====================
 
   return (
     <section className={styles.main}>
-      <SubNavbar filterHandle={filterHandle} />
+      <SubNavbar filterHandle={filterHandle}
+      tagReset={listRender} />
       <ul className={styles.feedList}>
         <Link to="/feed">
           {feeds.map((el) => (
-            <FeedContent feed={el} handleSelect={handleClick} />
+            <FeedContent feed={el} 
+            handleSelect={handleClick} />
           ))}
         </Link>
       </ul>

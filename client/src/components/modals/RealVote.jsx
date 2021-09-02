@@ -16,7 +16,7 @@ const RealVote = ({ feed, handleVote, handleFeedVote, clickOptReset }) => {
   return (
     <section className={styles.backdrop}>
       <div className={styles.realVote}>
-        <span className={styles.title}>정말로 투표하시겠습니까?</span>
+        <span className={styles.title}>정말 투표하시겠어요?</span>
         <span className={styles.btns}>
           <button className={styles.btn} onClick={clickNo}>
             아니오

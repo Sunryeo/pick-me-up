@@ -1,5 +1,5 @@
 .container {
-  padding: 5rem 0;
+  padding: 2rem 0 3rem 0;
   list-style: none;
   margin: 0 auto;
   width: 500px;
@@ -54,9 +54,9 @@
 
 .user {
   margin-right: 0.3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
   text-align: right;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-style: italic;
   color: rgb(150, 150, 150);
 }
@@ -84,19 +84,28 @@
   text-align: right;
   color: rgba(201, 83, 105, 0.959);
   font-weight: bold;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
   margin-right: 0.3rem;
 }
 .loginMessage {
   text-align: center;
 }
-@media screen and (max-width: 33rem) {
+@media screen and (max-width: 500px) {
   .container {
     /*최상위 바디 컨테이너*/
     width: 100%;
+    min-height: 70vh;
   }
   .images {
     width: 100%;
+  }
+  .categories,
+  .title,
+  .user,
+  .content,
+  .voteText {
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
   }
 }

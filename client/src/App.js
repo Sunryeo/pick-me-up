@@ -18,7 +18,8 @@ import axios from "axios";
 import Update from "./pages/update/Update";
 import MyinfoModify from "./pages/myinfoModify/MyinfoModify";
 import NullPage from "./components/NullPage/Nullpage";
-import LoadingIndicator from "./components/LoadingIndicator";
+import ScrollTop from "./components/scrollTop/ScrollTop";
+
 
 function App() {
   const history = useHistory();
@@ -81,13 +82,15 @@ function App() {
     return () => {};
   }, []);
 
+
   const [feeds, setFeeds] = useState([]); //전체 피드리스트
   const [selectedFeed, setSelectedFeed] = useState(null); //선택된 피드페이지(투표)로 이동할 때
   const [revised, setRevised] = useState(null); //writing 할 피드 선택된 것.
   const [listRender, setListRender] = useState(true);
 
   useEffect(() => {
-    axios
+    setTimeout(() => {
+      axios
       .get(
         "http://ec2-3-34-191-91.ap-northeast-2.compute.amazonaws.com/get-all-post"
       )
@@ -95,17 +98,17 @@ function App() {
         const result = res.data.data.sort((a, b) => {
           return new Date(b.created_at) - new Date(a.created_at);
         });
-
-        setFeeds(
-          result.map((el) => {
-            return {
-              ...el,
-              tags: JSON.parse(el.tags),
+        setFeeds(result.map((el) => {
+            return {...el, tags: JSON.parse(el.tags),
             };
-          })
-        );
+          }));
       });
+    }, 300);
   }, [listRender]); //글쓰기 버튼이 눌려질 때 마다 axiosGET요청 보내기.
+
+  // useEffect(() => {
+  //   setListRender();
+  // }); //자꾸 undefined 떠서 주석처리 해놓음. 위처럼 비동기 처리 해놓음...
 
   const select = (el) => {
     //썸네일 클릭 시
@@ -125,9 +128,7 @@ function App() {
 
           setFeeds(
             result.map((el) => {
-              return {
-                ...el,
-                tags: JSON.parse(el.tags),
+              return {...el, tags: JSON.parse(el.tags),
               };
             })
           );
@@ -142,9 +143,7 @@ function App() {
             return new Date(b.created_at) - new Date(a.created_at);
           }); //최신순으로 정렬
           result = result.map((el) => {
-            return {
-              ...el,
-              tags: JSON.parse(el.tags),
+            return {...el, tags: JSON.parse(el.tags),
             };
           }); //배열 파싱하고...
           result = result.filter((el) => el.tags.includes(tag));
@@ -316,61 +315,69 @@ function App() {
             accessToken={accessToken}
             setListRender={setListRender}
           />
-
-          <div id="page">
-            <Switch>
-              <Route exact={true} path="/">
-                <MainFeeds
-                  feeds={feeds}
-                  filterHandle={listFilter}
-                  handleClick={select}
-                />
-              </Route>
-              <Route path="/mypage">
-                <Mypage
-                  handleContent={revise}
-                  info={info}
-                  setInfo={setInfo}
-                  accessToken={accessToken}
-                  isLogin={isLogin}
-                  handleFeeds={select}
-                />
-              </Route>
-              <Route path="/modifyinfo">
-                <MyinfoModify
-                  info={info}
-                  setInfo={setInfo}
+          <main id="page">
+            <ScrollTop>
+              <Switch>
+                <Route exact={true} path="/">
+                  <MainFeeds
+                    feeds={feeds}
+                    filterHandle={listFilter}
+                    handleClick={select}
+                    listRender={listRender}
+                  />
+                </Route>
+                <Route path="/mypage">
+                  <Mypage
+                    handleContent={revise}
+                    info={info}
+                    setInfo={setInfo}
+                    accessToken={accessToken}
+                    isLogin={isLogin}
+                    handleFeeds={select}
+                    isAuthenticated={isAuthenticated}
+                    setListRender={() => setListRender(!listRender)}
+                  />
+                </Route>
+                <Route path="/modifyinfo">
+                  <MyinfoModify
+                    info={info}
+                    setInfo={setInfo}
                   setAccessToken={setAccessToken}
                   accessToken={accessToken}
                   isLogin={isLogin}
-                />
+                  isAuthenticated={isAuthenticated}
+                /> 
                 {/* <Mypage handleContent={revise} info={info} setInfo={setInfo} /> */}
-              </Route>
-              <Route path="/writing">
-                <Writing
-                  accessToken={accessToken}
-                  isLogin={isLogin}
-                  setListRender={() => setListRender(!listRender)}
-                />
-              </Route>
-              <Route path="/update">
-                <Update feed={revised} accessToken={accessToken} />
-              </Route>
-              {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
-                <Route path="/feed">
-                  <Feed
-                    feed={selectedFeed}
+                </Route>
+                <Route path="/writing">
+                  <Writing
                     accessToken={accessToken}
                     isLogin={isLogin}
+                    setListRender={() => setListRender(!listRender)}
                   />
                 </Route>
-              ) : null}
-              {/* <Route path="/feedresult">
-                <FeedResult feed={selectedResult}/>
-              </Route> */}
-              {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
-            </Switch>
-          </div>
+                <Route path="/update">
+                  <Update feed={revised} 
+                  accessToken={accessToken}
+                  setListRender={() => setListRender(!listRender)} />
+                </Route>
+                {selectedFeed ? ( //피드 클릭했으면 여기서 feed페이지로 감!
+                  <Route path="/feed">
+                    <Feed
+                      feed={selectedFeed}
+                      accessToken={accessToken}
+                      isLogin={isLogin}
+                      setListRender={() => setListRender(!listRender)}
+                    />
+                  </Route>
+                ) : null}
+                {/* <Route path="/feedresult">
+                  <FeedResult feed={selectedResult}/>
+                </Route> */}
+                {/* 이부분 투표창에서 새로고침시 페이지 사라지는거 막아야함 */}
+              </Switch>
+            </ScrollTop>
+          </main>
           <Footer></Footer>
           <ScrollButton />
         </Router>
